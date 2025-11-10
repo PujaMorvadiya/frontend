@@ -1,0 +1,119 @@
+@font-face {
+  font-family: 'Matter';
+  src:
+    url('../../public/fonts/Matter-Medium.woff2') format('woff2'),
+    url('../../public/fonts/Matter-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Matter';
+  src:
+    url('../../public/fonts/Matter-MediumItalic.woff2') format('woff2'),
+    url('../../public/fonts/Matter-MediumItalic.woff') format('woff');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Matter';
+  src:
+    url('../../public/fonts/Matter-BoldItalic.woff2') format('woff2'),
+    url('../../public/fonts/Matter-BoldItalic.woff') format('woff');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Matter';
+  src:
+    url('../../public/fonts/Matter-HeavyItalic.woff2') format('woff2'),
+    url('../../public/fonts/Matter-HeavyItalic.woff') format('woff');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Matter';
+  src:
+    url('../../public/fonts/Matter-LightItalic.woff2') format('woff2'),
+    url('../../public/fonts/Matter-LightItalic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Matter';
+  src:
+    url('../../public/fonts/Matter-Bold.woff2') format('woff2'),
+    url('../../public/fonts/Matter-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Matter';
+  src:
+    url('../../public/fonts/Matter-Light.woff2') format('woff2'),
+    url('../../public/fonts/Matter-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Matter';
+  src:
+    url('../../public/fonts/Matter-Heavy.woff2') format('woff2'),
+    url('../../public/fonts/Matter-Heavy.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Matter';
+  src:
+    url('../../public/fonts/Matter-SemiBoldItalic.woff2') format('woff2'),
+    url('../../public/fonts/Matter-SemiBoldItalic.woff') format('woff');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Matter';
+  src:
+    url('../../public/fonts/Matter-RegularItalic.woff2') format('woff2'),
+    url('../../public/fonts/Matter-RegularItalic.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Matter';
+  src:
+    url('../../public/fonts/Matter-Regular.woff2') format('woff2'),
+    url('../../public/fonts/Matter-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Matter';
+  src:
+    url('../../public/fonts/Matter-SemiBold.woff2') format('woff2'),
+    url('../../public/fonts/Matter-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}

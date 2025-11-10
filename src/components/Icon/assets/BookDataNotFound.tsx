@@ -1,0 +1,49 @@
+import { IconInputProps } from 'components/Icon/types/icons';
+
+const BookDataNotFoundIcon = ({
+  className,
+  width,
+  height,
+}: IconInputProps & { width?: string; height?: string }) => {
+  return (
+    <svg
+      width={width ?? '18'}
+      height={height ?? '18'}
+      viewBox={`0 0 ${width ?? '18'} ${height ?? '18'}`}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className ?? ''}
+    >
+      <path
+        d="M2.625 13.5V5.25C2.625 2.25 3.375 1.5 6.375 1.5H11.625C14.625 1.5 15.375 2.25 15.375 5.25V12.75C15.375 12.855 15.375 12.96 15.3675 13.065"
+        stroke="black"
+        strokeWidth="1.125"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M4.7625 11.25H15.375V13.875C15.375 15.3225 14.1975 16.5 12.75 16.5H5.25C3.8025 16.5 2.625 15.3225 2.625 13.875V13.3875C2.625 12.21 3.585 11.25 4.7625 11.25Z"
+        stroke="black"
+        strokeWidth="1.125"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M6 5.25H12"
+        stroke="black"
+        strokeWidth="1.125"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M6 7.875H9.75"
+        stroke="black"
+        strokeWidth="1.125"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+
+export default BookDataNotFoundIcon;

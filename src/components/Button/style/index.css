@@ -1,0 +1,72 @@
+.button {
+  @apply flex items-center justify-center gap-1 cursor-pointer w-fit text-base leading-tight py-2.5 px-5 text-center rounded-5px border border-solid transition-all duration-300 focus:ring-2 focus:ring-offset-2 select-none active:scale-95;
+}
+.button.black {
+  @apply bg-black border-black text-white hover:bg-black/10 hover:border-gray-light hover:text-black focus:ring-black/20;
+}
+.button.blackBorder {
+  @apply bg-transparent border-black text-black hover:bg-black hover:border-black hover:text-white focus:ring-black/20;
+}
+.button.PrimaryWood {
+  @apply bg-PrimaryWood border-PrimaryWood hover:border-LightWood text-white hover:bg-LightWood hover:text-black focus:ring-PrimaryWood/20;
+}
+.button.PrimaryWoodBorder {
+  @apply bg-transparent border-PrimaryWood text-PrimaryWood hover:bg-PrimaryWood hover:text-white focus:ring-PrimaryWood/20;
+}
+.button.PrimaryWoodLight {
+  @apply bg-LightWood border-LightWood hover:border-PrimaryWood text-black hover:bg-PrimaryWood hover:text-white focus:ring-PrimaryWood/20;
+}
+.button.PrimaryWoodLightBorder {
+  @apply bg-transparent border-LightWood text-PrimaryWood hover:bg-LightWood hover:border-LightWood hover:text-black focus:ring-PrimaryWood/20;
+}
+.button.Red {
+  @apply bg-PrimaryRed border-PrimaryRed text-white hover:bg-PrimaryRed/20 hover:border-PrimaryRed/10 hover:text-PrimaryRed focus:ring-PrimaryRed/20;
+}
+.button.RedOpacity {
+  @apply bg-PrimaryRed/20 border-PrimaryRed/10 text-PrimaryRed hover:bg-PrimaryRed hover:text-white focus:ring-PrimaryRed/20;
+}
+.button.Green {
+  @apply bg-PrimaryGreen border-PrimaryGreen text-white hover:bg-PrimaryGreen/20 hover:border-PrimaryGreen/10 hover:text-PrimaryGreen focus:ring-PrimaryGreen/20;
+}
+.button.Orange {
+  @apply bg-PrimaryOrange border-PrimaryOrange text-white hover:bg-PrimaryOrange/20 hover:border-PrimaryOrange/10 hover:text-PrimaryOrange focus:ring-PrimaryOrange/20;
+}
+.button.GreenOpacity {
+  @apply bg-PrimaryGreen/20 border-PrimaryGreen/10 text-PrimaryGreen hover:bg-PrimaryGreen hover:text-white focus:ring-PrimaryGreen/20;
+}
+.button.OffWhite {
+  @apply bg-OffWhite border-OffWhite text-black hover:bg-LightWood hover:border-LightWood hover:text-black focus:ring-black/20;
+}
+
+.button.Blue {
+  @apply bg-PrimaryBlue border-PrimaryBlue text-white hover:bg-PrimaryBlue/20 hover:border-PrimaryBlue/10 hover:text-PrimaryBlue focus:ring-PrimaryBlue/20;
+}
+.button.White {
+  @apply bg-white border-white text-black hover:bg-OffWhite hover:border-OffWhite focus:ring-black/20;
+}
+.button.Yellow {
+  @apply bg-PrimaryYellow/10 border-PrimaryYellow/10 text-PrimaryYellowDark hover:bg-PrimaryYellowDark hover:border-PrimaryYellowDark hover:text-OffWhite focus:ring-PrimaryYellow/20 min-w-[100px] px-6 py-3;
+}
+
+/* ACTION BUTTON */
+.action-button {
+  @apply w-11 h-11 p-2 inline-flex items-center justify-center rounded-md transition-all duration-300 active:scale-90 cursor-pointer select-none active:ring-2 active:ring-offset-2;
+}
+.action-button.small {
+  @apply w-8 h-8 p-1.5;
+}
+.action-button.green {
+  @apply bg-PrimaryGreen/10 text-PrimaryGreen hover:bg-PrimaryGreen hover:text-white active:ring-PrimaryGreen/50;
+}
+.action-button.primary {
+  @apply bg-PrimaryWood/10 text-PrimaryWood hover:bg-PrimaryWood hover:text-white active:ring-PrimaryWood/50;
+}
+.action-button.red {
+  @apply bg-PrimaryRed/10 text-PrimaryRed hover:bg-PrimaryRed hover:text-white active:ring-PrimaryRed/50;
+}
+.action-button.blue {
+  @apply bg-PrimaryBlue/10 text-PrimaryBlue hover:bg-PrimaryBlue hover:text-white active:ring-PrimaryBlue/50;
+}
+.action-button.black {
+  @apply bg-black/10 text-black hover:bg-black hover:text-white active:ring-black/50;
+}
