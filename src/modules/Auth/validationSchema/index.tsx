@@ -1,5 +1,5 @@
 import { subYears } from 'date-fns';
-import { getDateDifference } from 'pages/utils';
+import { getDateDifference } from 'modules/utils';
 import * as Yup from 'yup';
 
 // Email Validation
@@ -58,30 +58,7 @@ export const confirmPasswordValidation = () => {
 };
 
 // Register Validation
-// export const RegisterValidationSchema = () => {
-//   return Yup.object().shape({
-//     email: emailValidation(),
-//     password: passwordValidation(),
-//     confirm_password: confirmPasswordValidation(),
-//     profile_image: Yup.string(),
-//     first_name: Yup.string()
-//       .trim()
-//       .matches(/^[A-Za-z]+$/, 'First Name should contain only alphabets')
-//       .required('First Name is required')
-//       .min(2, 'First name must be at least 2 characters')
-//       .max(15, 'First name must be less than 15 characters'),
-//     last_name: Yup.string()
-//       .trim()
-//       .matches(/^[A-Za-z]+$/,'Last Name should contain only alphabets')
-//       .required('Last Name is required')
-//       .min(2,'Last name must be at least 2 characters')
-//       .max(15, 'Last name must be less than 15 characters'),
-//     language: Yup.string().required(),
-//     date_of_birth: Yup.date()
-//       .required('Date of Birth is required')
-//       .max(subYears(new Date(), 3), 'Please enter a valid Date of Birth'),
-//   });
-// };
+// Validation Schema
 
 export const RegisterValidationSchema = () => {
   return Yup.object().shape({

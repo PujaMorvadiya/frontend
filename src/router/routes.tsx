@@ -8,17 +8,17 @@ import { RootStateType } from '../reduxStore/store';
 import Loaders from '../components/Loaders';
 import { PUBLIC_NAVIGATION } from '../constant/navigation.constant';
 import { getAuthToken } from '../reduxStore/slices/tokenSlice';
-import { getActiveUserDataApi } from '../pages/Auth/services';
-import ErrorBoundary from '../pages/Auth/pages/ErrorBoundary';
-import { useRolePermission } from '../pages/utils';
+import { getActiveUserDataApi } from '../modules/Auth/services';
+import ErrorBoundary from '../modules/Auth/pages/ErrorBoundary';
+import { useRolePermission } from '../modules/utils';
 
 // Lazy imports
-const RequiresUnAuth = React.lazy(() => import('../pages/Auth/components/RequiresUnAuth'));
-const NotFound = React.lazy(() => import('../pages/Auth/pages/NotFound'));
-const Login = React.lazy(() => import('../pages/Auth/pages/Login'));
-const Register = React.lazy(() => import('../pages/Auth/pages/Register'));
-const ForgotPassword = React.lazy(() => import('../pages/Auth/pages/ForgotPassword'));
-const ResetPassword = React.lazy(() => import('../pages/Auth/pages/ResetPassword'));
+const RequiresUnAuth = React.lazy(() => import('../modules/Auth/components/RequiresUnAuth'));
+const NotFound = React.lazy(() => import('../modules/Auth/pages/NotFound'));
+const Login = React.lazy(() => import('../modules/Auth/pages/Login'));
+const Register = React.lazy(() => import('../modules/Auth/pages/Register'));
+const ForgotPassword = React.lazy(() => import('../modules/Auth/pages/ForgotPassword'));
+const ResetPassword = React.lazy(() => import('../modules/Auth/pages/ResetPassword'));
 
 export type RouteObjType = {
   path?: string;

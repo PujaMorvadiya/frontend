@@ -1,0 +1,25 @@
+.upload-profile-wrap {
+  @apply w-24 h-24 rounded-full relative p-1 bg-LightGray flex;
+}
+.upload-profile-link {
+  @apply flex items-center justify-center relative w-full h-full;
+}
+.upload-profile-loader {
+  @apply absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gray-50 border border-solid border-LightGray rounded-full;
+}
+.upload-icon-btn {
+  @apply cursor-pointer pointer-events-auto absolute bottom-1 right-1 inline-block p-1 w-6 h-6 rounded-full bg-PrimaryGreen text-white;
+}
+.upload-icon-remove-btn {
+  @apply cursor-pointer pointer-events-auto absolute bottom-1 right-1 inline-block p-1.5 w-6 h-6 rounded-full bg-PrimaryWood text-white;
+}
+.profile-big .upload-icon-remove-btn,
+.profile-big .upload-icon-btn {
+  @apply right-4 bottom-4;
+}
+.profile-big .upload-profile-wrap {
+  @apply w-48 h-48;
+}
+.profile-image {
+  @apply w-full h-full rounded-full object-cover;
+}

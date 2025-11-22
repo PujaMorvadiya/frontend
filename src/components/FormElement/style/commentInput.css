@@ -1,0 +1,38 @@
+.comment-input-wrap.reply-input .upload-media-icon,
+.comment-input-wrap.reply-input .capture-image-icon {
+  @apply -top-[36px];
+}
+.comment-input-wrap .text-input {
+  @apply w-[calc(100%_-_80px)] h-full p-0 border-none min-h-10 rounded-10px;
+}
+.comment-input-wrap:has(.text-input:disabled) {
+  @apply bg-LightWood cursor-not-allowed opacity-50;
+}
+.comment-input-wrap .input-wrap:has(.text-input:disabled) {
+  @apply bg-LightWood cursor-not-allowed opacity-50;
+}
+.comment-input-wrap .text-input:is(:disabled) {
+  @apply bg-transparent;
+}
+.comment-input-wrap .file-input-label {
+  @apply absolute right-4 top-1/2 -translate-y-1/2 inline-flex cursor-pointer items-center justify-center w-30px h-30px rounded-full bg-LightWood text-PrimaryWood;
+}
+.file-input {
+  @apply hidden;
+}
+.comment-input .comment-input-wrap {
+  @apply flex-1;
+}
+.comment-input .capture-image-icon,
+.comment-input .upload-media-icon {
+  @apply rounded-full flex text-black/50 items-center justify-center absolute -top-[34px] right-2 p-1.5 w-30px h-30px bg-transparent bg-LightWood cursor-pointer active:scale-95 transition-all duration-300;
+}
+.comment-input .capture-image-icon svg {
+  @apply w-full h-full;
+}
+.comment-input .upload-media-icon {
+  @apply right-11;
+}
+.reply-input input {
+  @apply w-[calc(100%_-_30px)] h-full p-0 border-none min-h-10 rounded-10px bg-transparent;
+}

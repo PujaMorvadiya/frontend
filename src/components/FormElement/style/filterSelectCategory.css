@@ -1,0 +1,39 @@
+.filter-category-selector .flex.flex-wrap.gap-4.pt-5 {
+  @apply gap-2;
+}
+
+.filter-category-selector .flex.flex-wrap.gap-4.pt-5 .flex {
+  @apply p-[4px_8px] rounded-[4px] gap-[4px];
+}
+
+.filter-category-selector .flex.flex-wrap.gap-4.pt-5 .flex span {
+  @apply text-[12px];
+}
+
+.filter-category-selector .flex.flex-wrap.gap-4.pt-5 .flex button {
+  @apply h-[12px] w-[12px] p-[2px];
+}
+.select-wrap {
+  @apply flex gap-10;
+}
+.select-wrap div:has([type='hidden']) {
+  @apply hidden;
+}
+/* .select-wrap > div:last-child:has(input) {
+  @apply hidden;
+} */
+.multi-select-wrap {
+  @apply flex flex-wrap gap-1 empty:hidden;
+}
+.multi-select-item {
+  @apply flex items-center gap-x-2 py-1 px-1.5 border border-solid border-LightWood rounded;
+}
+.multi-select-item .text {
+  @apply text-sm text-black leading-normal inline-flex gap-1;
+}
+.multi-select-clear {
+  @apply w-4 h-4 mt-[1px] select-none rounded-full hover:bg-PrimaryWood hover:text-white border border-solid border-PrimaryWood inline-block p-[3px] cursor-pointer active:scale-90 transition-all duration-300;
+}
+.width-full > .select-wrap > *:nth-child(3) {
+  @apply w-full;
+}

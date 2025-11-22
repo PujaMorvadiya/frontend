@@ -1,0 +1,45 @@
+.inputField {
+  @apply bg-white block w-full border border-solid border-LightWood/80 text-base text-black placeholder:text-black/30 px-4 py-3 rounded-5px leading-none ring-2 ring-transparent focus:ring-black/10 focus:ring-offset-2 transition-all duration-300 disabled:bg-black/5 disabled:cursor-not-allowed;
+}
+.inputField.has-file-input {
+  @apply pr-11;
+}
+textarea.inputField {
+  @apply leading-normal;
+}
+.input-file {
+  @apply flex flex-wrap gap-x-2;
+}
+.input-file .input-label {
+  @apply w-full;
+}
+.input-file .input-file-item {
+  @apply absolute top-1.5 right-2 active:scale-90 transition-all duration-300 cursor-pointer w-8 h-8 rounded-full bg-LightWood flex items-center justify-center text-PrimaryWood;
+}
+.input-file .input-file-item input {
+  @apply absolute w-full h-full opacity-0 cursor-pointer z-1;
+}
+.input-file .input-file-item svg {
+  @apply w-5 h-5 cursor-pointer;
+}
+::-webkit-file-upload-button {
+  @apply cursor-pointer;
+}
+.text-file-input {
+  @apply flex;
+}
+.input-text {
+  @apply relative flex-1;
+}
+.text-file-input-upload {
+  @apply w-11 h-11 rounded relative;
+}
+.text-file-input-upload img {
+  @apply w-full h-full rounded object-cover;
+}
+.text-file-input-upload:hover .icon {
+  @apply opacity-100;
+}
+.text-file-input-upload .icon {
+  @apply bg-black/70 flex items-center justify-center absolute top-0 left-0 w-full h-full text-white rounded opacity-0 cursor-pointer transition-all duration-300;
+}

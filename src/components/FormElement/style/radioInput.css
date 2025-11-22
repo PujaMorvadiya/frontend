@@ -1,0 +1,25 @@
+.radioButton {
+  @apply appearance-none translate-y-0.5 w-4 h-4 bg-white rounded-full cursor-pointer transition-all active:scale-90 checked:bg-PrimaryWood checked:border-white checked:border-[4px] checked:border-solid ring-1 ring-PrimaryWood/50 checked:ring-PrimaryWood;
+}
+.radio-option {
+  @apply flex;
+}
+
+.radio-option span:not(.input-wrap) {
+  @apply text-base flex font-medium left-4 text-primary max-w-[calc(100%_-_16px)] w-full ps-2;
+}
+.option-wrapper {
+  @apply flex flex-col gap-y-1;
+}
+.radio-option.checkbox .input-wrap {
+  @apply translate-y-1 flex items-center justify-center relative w-4 h-4 bg-white rounded cursor-pointer active:scale-90 checked:bg-PrimaryWood checked:border-white checked:border-[4px] checked:border-solid ring-1 ring-LightGray checked:ring-PrimaryWood;
+}
+.radio-option.checkbox .input-wrap:has(input:checked) {
+  @apply border-PrimaryWood bg-PrimaryWood;
+}
+.radio-option.checkbox .input-wrap:has(input:checked)::before {
+  @apply absolute content-[''] bottom-1.5 w-2.5 h-1.5 rotate-[-230deg] border-r-2 border-t-2 border-solid border-white;
+}
+.radio-option.checkbox .input-wrap input {
+  @apply absolute top-0 left-0 w-full h-full opacity-0;
+}

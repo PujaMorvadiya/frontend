@@ -28,7 +28,6 @@ export default defineConfig({
       hooks: "/src/hooks",
       constant: "/src/constant",
       utils: "src/utils",
-      pages: "src/pages"
     },
   },
 });
