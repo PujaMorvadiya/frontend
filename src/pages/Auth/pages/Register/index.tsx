@@ -1,23 +1,18 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import Input from "components/form/input/InputField";
 import Checkbox from "components/form/input/Checkbox";
+import { RegisterValidationSchema } from "../../../../pages/Auth/validationSchema";
+import { RegisterFormField, RegistervalueType } from "pages/Auth/types";
+import { useAxiosPost } from "hooks/useAxios";
+import { PUBLIC_NAVIGATION } from "constant/navigation.constant";
 
 export default function SignUpForm() {
   const [isChecked, setIsChecked] = useState(false);
-
-  const schema = yup.object({
-    fname: yup.string().required("First name is required"),
-    lname: yup.string().required("Last name is required"),
-    email: yup.string().email("Invalid email").required(),
-    password: yup.string().min(6, "At least 6 chars").required(),
-    agree: yup
-      .boolean()
-      .oneOf([true], "You must accept the terms and conditions"),
-  });
+  const [createUserApi, { isLoading }] = useAxiosPost();
+  const navigate = useNavigate()
 
   const {
     register,
@@ -25,15 +20,30 @@ export default function SignUpForm() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(RegisterValidationSchema()),
   });
 
-  const onSubmit = (data: unknown) => {
-    if (!isChecked) {
-      alert("Please agree to Terms & Conditions");
-      return;
+
+  const onSubmit = async (userData: RegistervalueType) => {
+    const formData = new FormData();
+
+    const fieldsToAppend: RegisterFormField[] = [
+      { key: "first_name", value: userData.fname.trim() },
+      { key: "last_name", value: userData.lname.trim() },
+      { key: "email", value: userData.email.trim() },
+      { key: "password", value: userData.password.trim() },
+    ];
+
+    fieldsToAppend.forEach(({ key, value }) => {
+      if (value !== undefined && value !== null) {
+        formData.append(key, value);
+      }
+    });
+
+    const { data, error } = await createUserApi("/auth/register", formData);
+    if (data && !error) {
+      navigate(PUBLIC_NAVIGATION.login);
     }
-    console.log("✅ Form submitted:", data);
   };
 
   return (
@@ -130,7 +140,7 @@ export default function SignUpForm() {
                   />
                 </div>
                 {/* <!-- Password --> */}
-                <div className="relative">
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                   <Input
                     label="Password"
                     type="password"
@@ -138,27 +148,44 @@ export default function SignUpForm() {
                     register={register("password")}
                     errorMessage={errors.password?.message?.toString()}
                   />
+                  <Input
+                    label="Confirm Password"
+                    type="password"
+                    placeholder="Confirm your password"
+                    register={register("confirm_password")}
+                    errorMessage={errors.confirm_password?.message?.toString()}
+                  />
+
                 </div>
+                {/* <div className="relative">
+                  <Input
+                    label="Date of Birth"
+                    type="date"
+                    register={register("date_of_birth")}
+                    errorMessage={errors.date_of_birth?.message?.toString()}
+                  />
+                </div> */}
+
 
                 {/* <!-- Checkbox --> */}
                 <div className="flex flex-col  gap-3">
                   <Checkbox
                     label={
                       <p className="inline-block font-normal text-gray-500 dark:text-gray-400">
-                    By creating an account means you agree to the{" "}
-                    <span className="text-gray-800 dark:text-white/90">
-                      Terms and Conditions,
-                    </span>{" "}
-                    and our{" "}
-                    <span className="text-gray-800 dark:text-white">
-                      Privacy Policy
-                    </span>
-                  </p>
+                        By creating an account means you agree to the{" "}
+                        <span className="text-gray-800 dark:text-white/90">
+                          Terms and Conditions,
+                        </span>{" "}
+                        and our{" "}
+                        <span className="text-gray-800 dark:text-white">
+                          Privacy Policy
+                        </span>
+                      </p>
                     }
                     checked={isChecked}
                     onChange={(val) => {
                       setIsChecked(val);
-                      setValue("agree", val); 
+                      setValue("agree", val);
                     }}
                     register={register("agree")}
                     errorMessage={errors.agree?.message?.toString()}

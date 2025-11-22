@@ -9,15 +9,15 @@ export enum loginMethod {
 }
 
 export type RegistervalueType = {
-  first_name: string;
-  last_name: string;
-  // phone?: string;
-  // mobile?: string;
+  fname: string;
+  lname: string;
   email: string;
-  birth_date: string;
+  // date_of_birth: Date | undefined;
   password: string;
-  confirmPassword: string;
+  confirm_password: string;
+  agree?:boolean;
 };
+
 
 export type ResetPasswordFormFields = {
   password: string;
@@ -35,4 +35,10 @@ export interface AuthCardProps {
   onBackBtnClicked?: () => void;
   showHeader?: React.ReactNode;
   children: React.ReactNode;
+}
+
+
+export interface RegisterFormField {
+  key: string;
+  value: string | File | undefined;
 }

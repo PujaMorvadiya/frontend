@@ -15,6 +15,11 @@ export default defineConfig({
       },
     }),
   ],
+  server: {
+    port: 3000,        // <-- specify your port here
+    strictPort: true,  // optional: fail if port is already in use
+    open: true,        // optional: automatically open in browser
+  },
   resolve: {
     alias: {
       components: "/src/components",
@@ -23,6 +28,7 @@ export default defineConfig({
       hooks: "/src/hooks",
       constant: "/src/constant",
       utils: "src/utils",
+      pages: "src/pages"
     },
   },
 });
