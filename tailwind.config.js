@@ -31,7 +31,7 @@ export default {
         PrimaryWood: "#5D5851",
         PrimaryGreen: "#07641B",
         PrimaryRed: "#AC1B1B",
-        PrimaryBlue: "#08599B",
+        PrimaryBlue: "#3641F5",
         PrimaryYellow: "#E1B147",
         PrimaryYellowLight: "#EBC65B",
         PrimaryYellowDark: "#e39d02",

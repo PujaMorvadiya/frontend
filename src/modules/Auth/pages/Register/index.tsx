@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router";
-import { Formik, Form, Field, FieldProps } from "formik";
+import { Formik, Form } from "formik";
 import { useAxiosPost } from "hooks/useAxios";
 import { PUBLIC_NAVIGATION } from "constant/navigation.constant";
 import { RegisterValidationSchema } from "modules/Auth/validationSchema";
@@ -157,12 +157,14 @@ export default function SignUpForm() {
                 check={values.agree}
               />
 
-              <button
-                type="submit"
+
+              <Button
                 className="flex items-center justify-center w-full px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600"
+                type="submit"
+                isLoading={isLoading}
               >
-                {isLoading ? "Signing Up..." : "Sign Up"}
-              </button>
+                Sign Up
+              </Button>
             </Form>
           )}
         </Formik>

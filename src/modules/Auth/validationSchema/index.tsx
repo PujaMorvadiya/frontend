@@ -94,7 +94,7 @@ export const LoginValidationSchema = () => {
   return Yup.object().shape({
     email: emailValidation(),
     password: passwordValidation(true),
-    acceptTermsAndCondition: Yup.boolean(),
+    agree: Yup.boolean().oneOf([true], 'You must accept the terms and conditions'),
   });
 };
 

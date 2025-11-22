@@ -14,21 +14,22 @@ export interface IButtonProps {
   isIcon?: boolean;
   customStyle?: React.CSSProperties;
   variants?:
-    | 'black'
-    | 'blackBorder'
-    | 'OffWhite'
-    | 'PrimaryWood'
-    | 'PrimaryWoodBorder'
-    | 'PrimaryWoodLight'
-    | 'PrimaryWoodLightBorder'
-    | 'Green'
-    | 'GreenOpacity'
-    | 'Red'
-    | 'Orange'
-    | 'Blue'
-    | 'White'
-    | 'Yellow'
-    | 'RedOpacity';
+  | 'black'
+  | 'blackBorder'
+  | 'OffWhite'
+  | 'PrimaryWood'
+  | 'PrimaryWoodBorder'
+  | 'PrimaryWoodLight'
+  | 'PrimaryWoodLightBorder'
+  | 'Green'
+  | 'GreenOpacity'
+  | 'Red'
+  | 'Orange'
+  | 'Blue'
+  | 'White'
+  | 'Yellow'
+  | 'RedOpacity'
+  | 'PrimaryBlue';
   tooltipText?: string;
   tooltipPosition?: 'top' | 'bottom' | 'left' | 'right';
 }
