@@ -5,17 +5,23 @@ import ScrollToTop from 'hooks/ScrollOnTop';
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { getCurrentUser } from 'reduxStore/slices/authSlice';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { getCurrentUser, getAuth } from 'reduxStore/slices/authSlice';
 import { getAuthToken } from 'reduxStore/slices/tokenSlice';
 
 const RequiresAuth = ({ children }: { children: React.ReactNode }) => {
   const authToken = useSelector(getAuthToken);
   const userData = useSelector(getCurrentUser);
+  const { isAuthenticated } = useSelector(getAuth);
   const [navigationRoute, setNavigationRoute] = useState(
     window.location.pathname + window.location.search + window.location.hash
   );
   const navigate = useNavigate();
+
+  // Redirect to login if not authenticated
+  if (!authToken?.token || !isAuthenticated) {
+    return <Navigate to={PUBLIC_NAVIGATION.login} replace />;
+  }
 
   useEffect(() => {
     navigate(navigationRoute);
@@ -51,12 +57,10 @@ const RequiresAuth = ({ children }: { children: React.ReactNode }) => {
   }, [userData?.role?.role]);
 
   useEffect(() => {
-    // For Global BG color
     const element = document.getElementsByTagName('body')[0];
     if (userData?.role?.role === Roles.User) {
       element.style.backgroundColor = '#f2f2f2';
     }
-    // For Global BG color
   }, [userData]);
 
   return (

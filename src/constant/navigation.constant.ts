@@ -92,6 +92,7 @@ export const UserNavigation = Object.freeze({
 });
 
 export const PRIVATE_NAVIGATION = Object.freeze({
+  home: '/',
   dashboard: {
     view: {
       path: '/',

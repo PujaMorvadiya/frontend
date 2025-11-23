@@ -12,13 +12,17 @@ import { getActiveUserDataApi } from '../modules/Auth/services';
 import ErrorBoundary from '../modules/Auth/pages/ErrorBoundary';
 import { useRolePermission } from '../modules/utils';
 
+import AuthRoutes from './auth.routes';
+import DashboardRoutes from './dashboard.routes';
+import AdminRoutes from './admin.routes';
+import UserRoutes from './user.routes';
+import OrganizationRoutes from './organization.routes';
+
 // Lazy imports
 const RequiresUnAuth = React.lazy(() => import('../modules/Auth/components/RequiresUnAuth'));
+const RequiresAuth = React.lazy(() => import('../modules/Auth/components/RequiresAuth'));
 const NotFound = React.lazy(() => import('../modules/Auth/pages/NotFound'));
-const Login = React.lazy(() => import('../modules/Auth/pages/Login'));
-const Register = React.lazy(() => import('../modules/Auth/pages/Register'));
-const ForgotPassword = React.lazy(() => import('../modules/Auth/pages/ForgotPassword'));
-const ResetPassword = React.lazy(() => import('../modules/Auth/pages/ResetPassword'));
+const AppLayout = React.lazy(() => import('../layout/AppLayout'));
 
 export type RouteObjType = {
   path?: string;
@@ -40,14 +44,6 @@ const applySuspense = (routes: RouteObjType[]): RouteObjType[] =>
     ),
   }));
 
-// Public (unauthenticated) routes
-const AuthenticationRoutes: RouteObjType[] = [
-  { path: PUBLIC_NAVIGATION.login, element: <Login /> },
-  { path: PUBLIC_NAVIGATION.register, element: <Register /> },
-  { path: PUBLIC_NAVIGATION.forgotPassword, element: <ForgotPassword /> },
-  { path: PUBLIC_NAVIGATION.resetPassword, element: <ResetPassword /> },
-];
-
 // Define main component
 const Routes = () => {
   const dispatch = useDispatch();
@@ -68,11 +64,25 @@ const Routes = () => {
     }
   }, [token, isAuthenticated, getActiveUser]);
 
-  // Only unauthenticated routes for now
-  const unauthenticatedRoutes: RouteObjType[] = applySuspense([
+  const ProtectedRoutes: RouteObjType[] = [
+    ...DashboardRoutes,
+    // ...AdminRoutes,
+    // ...UserRoutes,
+    // ...OrganizationRoutes,
+  ];
+
+  const allRoutes: RouteObjType[] = [
     {
       element: <RequiresUnAuth />,
-      children: AuthenticationRoutes,
+      children: AuthRoutes,
+    },
+    {
+      element: (
+        <RequiresAuth>
+          <AppLayout />
+        </RequiresAuth>
+      ),
+      children: applySuspense(ProtectedRoutes),
     },
     {
       path: '*',
@@ -82,12 +92,10 @@ const Routes = () => {
         </Suspense>
       ),
     },
-  ]);
+  ];
 
-  // Role-based permission filtering
-  const finalRoutes: RouteObjType[] = unauthenticatedRoutes.filter((route) => {
+  const finalRoutes: RouteObjType[] = allRoutes.filter((route) => {
     if (route.feature && route.permission) {
-      // eslint-disable-next-line react-hooks/rules-of-hooks
       return useRolePermission(route.feature, route.permission);
     }
     return true;

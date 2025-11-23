@@ -8,6 +8,9 @@ import "./index.css";
 import "swiper/swiper-bundle.css";
 import "simplebar-react/dist/simplebar.min.css";
 import store from "./reduxStore/store";
+import { setupAxios } from "./axios/axiosSetup";
+
+setupAxios(store);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

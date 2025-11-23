@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router";
 import { Formik, Form } from "formik";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import InputField from "components/FormElement/InputField";
 import Checkbox from "components/FormElement/CheckBox";
 import Button from "components/Button/Button";
@@ -8,10 +9,15 @@ import { LoginValidationSchema } from "modules/Auth/validationSchema";
 import Icon from "components/Icon";
 import { useAxiosPost } from "hooks/useAxios";
 import { PRIVATE_NAVIGATION } from "constant/navigation.constant";
+import { getActiveUserDataApi } from "modules/Auth/services";
+import { setToken } from "reduxStore/slices/tokenSlice";
+import { setCredentials, setAuthenticated } from "reduxStore/slices/authSlice";
 
 export default function SignInForm() {
   const [loginApi, { isLoading }] = useAxiosPost();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { getActiveUser } = getActiveUserDataApi();
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
@@ -22,14 +28,37 @@ export default function SignInForm() {
   };
 
   const onSubmit = async (values: typeof initialValues) => {
-
     const { data, error } = await loginApi("/auth/login", {
       email: values.email.trim(),
       password: values.password.trim(),
     });
 
     if (data && !error) {
-      navigate(PRIVATE_NAVIGATION.dashboard.view.path);
+      const token = data.token || 
+                   data.access_token || 
+                   data.accessToken ||
+                   data.data?.token ||
+                   data.data?.access_token;
+      
+      const user = data.user || data.data?.user;
+      
+      if (token) {
+        dispatch(setToken({ token }));
+        
+        if (user) {
+          dispatch(setCredentials({ user }));
+          dispatch(setAuthenticated({ isAuthenticated: true }));
+        }
+        
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+      
+      const userResponse = await getActiveUser();
+      if (userResponse?.data) {
+        navigate(PRIVATE_NAVIGATION.dashboard.view.path);
+      } else if (userResponse?.error) {
+        console.error('Failed to get user data:', userResponse.error);
+      }
     }
   };
 

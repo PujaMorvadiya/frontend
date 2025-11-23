@@ -17,9 +17,15 @@ export const setupAxios = (store: Store) => {
     request.headers = request.headers ?? {};
     request.headers['accept-timezone'] = timeZone;
 
-    if (request.headers !== undefined && authToken) {
-      request.headers.Authorization = `Bearer ${authToken}`;
+    if (authToken) {
+      const bearerToken = `Bearer ${authToken}`;
+      request.headers.Authorization = bearerToken;
+      request.headers.authorization = bearerToken;
+    } else {
+      delete request.headers.Authorization;
+      delete request.headers.authorization;
     }
+
     request.withCredentials = true;
     return request;
   });
@@ -46,14 +52,16 @@ export const setupAxios = (store: Store) => {
         store.dispatch(clearActiveSidebar());
         localStorage.removeItem('persist:root');
         window.location.href = '/auth/login';
+        return;
       }
       if (
-        e.response.status === 400 ||
-        e.response.status === 500 ||
-        e.response.status === 401 ||
-        e.response.status === 422 ||
-        e.response.status === 403 ||
-        e.response.status === 404
+        e.response &&
+        (e.response.status === 400 ||
+          e.response.status === 500 ||
+          e.response.status === 401 ||
+          e.response.status === 422 ||
+          e.response.status === 403 ||
+          e.response.status === 404)
       ) {
         const { toast } = e.response.data;
         if (toast) {
@@ -68,10 +76,10 @@ export const setupAxios = (store: Store) => {
           );
         }
       }
-      if (e.response.status === 403) {
+      if (e.response && e.response.status === 403) {
         window.location.href = '/';
       }
-      throw e.response.data;
+      throw e.response?.data || e;
     }
   );
 };
