@@ -39,6 +39,7 @@ export enum FeatureEnum {
   Setting = 'Setting',
   AuditLog = 'AuditLog',
   Wishlist = 'Wishlist',
+  Calendar = 'Calendar'
 }
 
 export const PermissionEnum = {

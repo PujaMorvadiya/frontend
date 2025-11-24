@@ -213,6 +213,13 @@ export const AdminNavigation = Object.freeze({
       permission: PermissionEnum.Create,
     },
   },
+  calendar: {
+    view: {
+      path: '/admin/calendar',
+      feature: FeatureEnum.Calendar,
+      permission: PermissionEnum.View,
+    },
+  },
   settings: {
     view: {
       path: '/admin/settings',
