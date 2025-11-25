@@ -1,8 +1,12 @@
 import { SidebarProvider, useSidebar } from "../context/SidebarContext";
 import { Outlet } from "react-router";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import AppHeader from "./AppHeader";
 import Backdrop from "./Backdrop";
 import AppSidebar from "./AppSidebar";
+import { getActiveUserDataApi } from "../modules/Auth/services";
+import { getCurrentUser } from "../reduxStore/slices/authSlice";
 
 const LayoutContent: React.FC = () => {
   const { isExpanded, isHovered, isMobileOpen } = useSidebar();
@@ -28,6 +32,15 @@ const LayoutContent: React.FC = () => {
 };
 
 const AppLayout: React.FC = () => {
+  const { getActiveUser } = getActiveUserDataApi();
+  const userData = useSelector(getCurrentUser);
+
+  useEffect(() => {
+    if (userData) {
+      getActiveUser();
+    }
+  }, [userData]);
+
   return (
     <SidebarProvider>
       <LayoutContent />

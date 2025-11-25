@@ -64,6 +64,5 @@ export const DurationLogs = [
 
 export const LayoutConstant = {
   ...Roles,
-  CMS: 'CMS',
   ADMIN_USER: 'ADMIN-USER',
 };

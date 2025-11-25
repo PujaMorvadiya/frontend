@@ -8,9 +8,10 @@ import { useSelector } from "react-redux";
 import { getCurrentUser } from "../../reduxStore/slices/authSlice";
 import { setLogoutData } from "../../reduxStore/slices/authSlice";
 import { clearToken } from "../../reduxStore/slices/tokenSlice";
-import { clearActiveSidebar } from "../../reduxStore/slices/layoutSlice";
+import { clearActiveSidebar, setActiveLayoutType } from "../../reduxStore/slices/layoutSlice";
 import { setRoles, setPermission, setRolePermission, setAccess } from "../../reduxStore/slices/rolePermissionSlice";
 import { PUBLIC_NAVIGATION } from "../../constant/navigation.constant";
+import { LayoutConstant } from "../../constant/common.constant";
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,6 +31,7 @@ export default function UserDropdown() {
     dispatch(setLogoutData());
     dispatch(clearToken());
     dispatch(clearActiveSidebar());
+    dispatch(setActiveLayoutType(LayoutConstant.User));
     
     dispatch(setRoles([]));
     dispatch(setPermission([]));

@@ -120,6 +120,6 @@ export type TokenSliceType = {
 export type SideBarType = {
   isSidebarOpen: boolean;
   isSidebarActive: string | null;
-  // isHeaderActive: string | null;
-  // activeLayoutType: string;
+  isHeaderActive: string | null;
+  activeLayoutType: string;
 };

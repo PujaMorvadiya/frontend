@@ -66,8 +66,11 @@ const RequiresAuth = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
       <ScrollToTop />
-      {authToken && !userData ? <Loaders type="SiteLoader" /> : <></>}
-      {children}
+      {authToken && !userData ? (
+        <Loaders type="SiteLoader" />
+      ) : (
+        children
+      )}
     </div>
   );
 };

@@ -8,7 +8,6 @@ import { RootStateType } from '../reduxStore/store';
 import Loaders from '../components/Loaders';
 import { PUBLIC_NAVIGATION } from '../constant/navigation.constant';
 import { getAuthToken } from '../reduxStore/slices/tokenSlice';
-import { getActiveUserDataApi } from '../modules/Auth/services';
 import ErrorBoundary from '../modules/Auth/pages/ErrorBoundary';
 import { useRolePermission } from '../modules/utils';
 
@@ -47,28 +46,17 @@ const applySuspense = (routes: RouteObjType[]): RouteObjType[] =>
 // Define main component
 const Routes = () => {
   const dispatch = useDispatch();
-  const { token } = useSelector(getAuthToken);
-  const { isAuthenticated } = useSelector((state: RootStateType) => state.auth);
-  const { getActiveUser, isLoading: isActiveUserLoading } = getActiveUserDataApi();
   const activeSideBar = useSelector(ActiveSidebarSelector);
 
   useEffect(() => {
     dispatch(currentPageCount({ currentPage: 1 }));
   }, [activeSideBar, dispatch]);
 
-  useEffect(() => {
-    if (!window.location.href.includes(PUBLIC_NAVIGATION.somethingWentWrong)) {
-      if (token && !isAuthenticated) {
-        getActiveUser();
-      }
-    }
-  }, [token, isAuthenticated, getActiveUser]);
-
   const ProtectedRoutes: RouteObjType[] = [
     ...DashboardRoutes,
-    // ...AdminRoutes,
-    // ...UserRoutes,
-    // ...OrganizationRoutes,
+    ...AdminRoutes,
+    ...UserRoutes,
+    ...OrganizationRoutes,
   ];
 
   const allRoutes: RouteObjType[] = [
@@ -88,7 +76,7 @@ const Routes = () => {
       path: '*',
       element: (
         <Suspense fallback={<Loaders type="SiteLoader" />}>
-          {isActiveUserLoading ? <Loaders type="SiteLoader" /> : <NotFound />}
+          <NotFound />
         </Suspense>
       ),
     },
