@@ -26,6 +26,8 @@ import { LayoutConstant, Roles } from "constant/common.constant";
 import {
   AdminNavigation,
   PRIVATE_NAVIGATION,
+  OrganizationNavigation,
+  UserNavigation,
 } from "constant/navigation.constant";
 
 /* ----------------------------------------------
@@ -54,12 +56,17 @@ const getRoleBasedMenu = (activeLayout: string): NavItem[] => {
       {
         name: "Manage Users",
         icon: <UserHexa />,
-        path: `/admin${PRIVATE_NAVIGATION.users.view.path}`,
+        path: AdminNavigation.manageUsers.list.path,
       },
       {
         name: "Manage Organizations",
         icon: <Org />,
-        path: "/admin/organization",
+        path: AdminNavigation.manageOrganizations.list.path,
+      },
+      {
+        name: "Manage Movies",
+        icon: <PageIcon />,
+        path: AdminNavigation.manageMovies.list.path,
       },
       {
         name: "Calendar",
@@ -67,19 +74,22 @@ const getRoleBasedMenu = (activeLayout: string): NavItem[] => {
         path: AdminNavigation.calendar.view.path,
       },
       {
+        name: "Settings",
+        icon: <PlugInIcon />,
+        path: AdminNavigation.settings.view.path,
+      },
+      {
         name: "Profile",
         icon: <UserCircleIcon />,
         path: AdminNavigation.profile.view.path,
       },
       {
-        name: "Forms",
-        icon: <ListIcon />,
-        subItems: [{ name: "Form Elements", path: "/form-elements" }],
-      },
-      {
-        name: "Tables",
-        icon: <TableIcon />,
-        subItems: [{ name: "Basic Tables", path: "/basic-tables" }],
+        name: "Reports",
+        icon: <PieChartIcon />,
+        subItems: [
+          { name: "Bookings", path: AdminNavigation.reports.bookings.path },
+          { name: "Users", path: AdminNavigation.reports.users.path },
+        ],
       },
     ];
   }
@@ -89,17 +99,27 @@ const getRoleBasedMenu = (activeLayout: string): NavItem[] => {
       {
         name: "Dashboard",
         icon: <GridIcon />,
-        path: AdminNavigation.dashboard.view.path,
+        path: OrganizationNavigation.dashboard.view.path,
       },
       {
-        name: "Manage Users",
-        icon: <UserHexa />,
-        path: "/manage-user",
+        name: "Movies",
+        icon: <PageIcon />,
+        path: OrganizationNavigation.manageMovies.list.path,
       },
       {
-        name: "Organization Profile",
-        icon: <Org />,
-        path: PRIVATE_NAVIGATION.profile.view.path,
+        name: "Shows",
+        icon: <CalenderIcon />,
+        path: OrganizationNavigation.manageShows.list.path,
+      },
+      {
+        name: "Bookings",
+        icon: <BoxCubeIcon />,
+        path: OrganizationNavigation.manageBookings.view.path,
+      },
+      {
+        name: "Profile",
+        icon: <UserCircleIcon />,
+        path: OrganizationNavigation.profile.view.path,
       },
     ];
   }
@@ -109,17 +129,22 @@ const getRoleBasedMenu = (activeLayout: string): NavItem[] => {
       {
         name: "Dashboard",
         icon: <GridIcon />,
-        path: "/dashboard",
+        path: "/",
+      },
+      {
+        name: "Bookings",
+        icon: <BoxCubeIcon />,
+        path: UserNavigation.bookings.view.path,
+      },
+      {
+        name: "Wishlist",
+        icon: <PieChartIcon />,
+        path: UserNavigation.wishlist.view.path,
       },
       {
         name: "Profile",
         icon: <UserCircleIcon />,
         path: PRIVATE_NAVIGATION.profile.view.path,
-      },
-      {
-        name: "Settings",
-        icon: <PlugInIcon />,
-        path: "/settings",
       },
     ];
   }

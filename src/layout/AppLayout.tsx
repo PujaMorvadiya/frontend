@@ -1,6 +1,6 @@
 import { SidebarProvider, useSidebar } from "../context/SidebarContext";
 import { Outlet } from "react-router";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import AppHeader from "./AppHeader";
 import Backdrop from "./Backdrop";
@@ -34,12 +34,14 @@ const LayoutContent: React.FC = () => {
 const AppLayout: React.FC = () => {
   const { getActiveUser } = getActiveUserDataApi();
   const userData = useSelector(getCurrentUser);
+  const hasCalledApi = useRef(false);
 
   useEffect(() => {
-    if (userData) {
+    if (userData && !hasCalledApi.current) {
+      hasCalledApi.current = true;
       getActiveUser();
     }
-  }, [userData]);
+  }, []);
 
   return (
     <SidebarProvider>

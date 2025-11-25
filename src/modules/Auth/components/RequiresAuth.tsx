@@ -44,10 +44,10 @@ const RequiresAuth = ({ children }: { children: React.ReactNode }) => {
             setNavigationRoute('/');
             break;
           case LayoutConstant.Admin:
-            setNavigationRoute('/admin');
+            setNavigationRoute('/admin/dashboard');
             break;
           case LayoutConstant.Organization:
-            setNavigationRoute('/organization');
+            setNavigationRoute('/org/dashboard');
             break;
           default:
             setNavigationRoute('/');
