@@ -66,3 +66,20 @@ export const LayoutConstant = {
   ...Roles,
   ADMIN_USER: 'ADMIN-USER',
 };
+
+export const statusFilter = [
+  { value: 'all', label: 'All' },
+  {
+    value: 'active',
+    label: 'Active',
+  },
+  {
+    value: 'inactive',
+    label: 'Inactive',
+  },
+];
+
+export enum StatusEnum {
+  ACTIVE = 'active',
+  INACTIVE = 'inactive',
+}

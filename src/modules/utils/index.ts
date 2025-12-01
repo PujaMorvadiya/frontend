@@ -3,8 +3,10 @@ import Cookies from 'js-cookie';
 import { PUBLIC_NAVIGATION } from '../../constant/navigation.constant';
 import { setLogoutData, setUserData } from '../../reduxStore/slices/authSlice';
 import { clearToken } from '../../reduxStore/slices/tokenSlice';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getRolesPermission } from 'reduxStore/slices/rolePermissionSlice';
+import { useEffect, useState } from 'react';
+import { currentPageCount } from 'reduxStore/slices/paginationSlice';
 
 export const useRolePermission = (featureName: string, permissionName: string) => {
   const RolePermissions = useSelector(getRolesPermission);
@@ -71,3 +73,26 @@ export function getDateDifference(date: Date) {
 
   return { yearDiff, monthDiff, dayDiff };
 }
+
+export const capitalizeFirstCharacter = (inputString: string) => {
+  return inputString.charAt(0).toUpperCase() + inputString.slice(1);
+};
+
+export function useDebounce(value: string, delay: number) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+      dispatch(currentPageCount({ currentPage: 1 }));
+    }, delay);
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue?.trim();
+}
+
+export const TABLE_DATA_LIMIT = 10;

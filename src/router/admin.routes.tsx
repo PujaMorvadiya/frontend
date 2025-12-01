@@ -11,7 +11,7 @@ const BasicTables = React.lazy(() => import("../modules/Tables/BasicTables"));
 const Error404 = React.lazy(() => import("../modules/Auth/pages/NotFound"));
 const LineChart = React.lazy(() => import("../modules/Charts/LineChart"));
 const BarChart = React.lazy(() => import("../modules/Charts/BarChart"));
-const ManageUsers = React.lazy(() => import("../modules/Management/pages/ManageUsers"));
+const ManageUsers = React.lazy(() => import("../modules/ManageUsers"));
 const ManageOrganizations = React.lazy(() => import("../modules/Management/pages/ManageOrganizations"));
 const EditOrganization =React.lazy(() => import("../modules/Management/pages/ManageOrganizations/editorg"));
 const BlankPage = React.lazy(() => import("../modules/Blank"));
@@ -66,17 +66,31 @@ const AdminRoutes: RouteObjType[] = [
   },
   {
     element: <ManageUsers />,
-    path: `/admin${PRIVATE_NAVIGATION.users.view.path}`,
-    feature: PRIVATE_NAVIGATION.users.view.feature,
-    permission: PRIVATE_NAVIGATION.users.view.permission,
+    ...AdminNavigation.manageUsers.list,
   },
   {
-    ...AdminNavigation.manageOrganizations.view,
     element: <ManageOrganizations />,
+    ...AdminNavigation.manageOrganizations.list,
   },
   {
-    element: <EditOrganization backURL="/organization" />,
+    element: <EditOrganization backURL="/admin/organizations" />,
     ...AdminNavigation.manageOrganizations.edit,
+  },
+  {
+    ...AdminNavigation.reports.bookings,
+    element: <BasicTables />,
+  },
+  {
+    ...AdminNavigation.reports.users,
+    element: <BasicTables />,
+  },
+  {
+    ...AdminNavigation.manageMovies.list,
+    element: <BasicTables />,
+  },
+  {
+    ...AdminNavigation.settings.view,
+    element: <BlankPage />,
   },
 
 ];

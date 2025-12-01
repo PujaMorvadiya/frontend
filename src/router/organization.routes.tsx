@@ -15,7 +15,7 @@ const Alerts = React.lazy(() => import("../modules/UiElements/Alerts"));
 
 // Additional organization-only
 const ManageUsers = React.lazy(() =>
-    import("../modules/Management/pages/ManageUsers")
+    import("../modules/ManageUsers")
 );
 
 const OrganizationRoutes: RouteObjType[] = [

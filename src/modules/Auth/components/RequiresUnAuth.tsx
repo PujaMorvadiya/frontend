@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { Suspense, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, Outlet } from 'react-router-dom';
 import { getActiveUserDataApi } from '../services';
@@ -17,19 +17,25 @@ const RequiresUnAuth = () => {
   const { token } = useSelector(getAuthToken);
   const pathKeys = Object.keys(PUBLIC_NAVIGATION);
   const { getActiveUser } = getActiveUserDataApi();
+  const apiCallAttempted = useRef(false);
 
   const getUserData = async () => {
     if (
       token &&
       !isAuthenticated &&
-      !window.location.href.includes(PUBLIC_NAVIGATION.somethingWentWrong)
+      !window.location.href.includes(PUBLIC_NAVIGATION.somethingWentWrong) &&
+      !apiCallAttempted.current
     ) {
+      apiCallAttempted.current = true;
       await getActiveUser();
     }
   };
 
   useEffect(() => {
     getUserData();
+    return () => {
+      apiCallAttempted.current = false;
+    };
   }, []);
 
   if (

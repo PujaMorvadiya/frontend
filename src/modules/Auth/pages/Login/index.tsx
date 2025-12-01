@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router";
 import { Formik, Form } from "formik";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import InputField from "components/FormElement/InputField";
 import Checkbox from "components/FormElement/CheckBox";
@@ -18,6 +18,7 @@ export default function SignInForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { getActiveUser } = getActiveUserDataApi();
+  const isSubmitting = useRef(false);
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
@@ -28,37 +29,44 @@ export default function SignInForm() {
   };
 
   const onSubmit = async (values: typeof initialValues) => {
-    const { data, error } = await loginApi("/auth/login", {
-      email: values.email.trim(),
-      password: values.password.trim(),
-    });
+    if (isSubmitting.current) return;
+    isSubmitting.current = true;
 
-    if (data && !error) {
-      const token = data.token || 
-                   data.access_token || 
-                   data.accessToken ||
-                   data.data?.token ||
-                   data.data?.access_token;
-      
-      const user = data.user || data.data?.user;
-      
-      if (token) {
-        dispatch(setToken({ token }));
+    try {
+      const { data, error } = await loginApi("/auth/login", {
+        email: values.email.trim(),
+        password: values.password.trim(),
+      });
+
+      if (data && !error) {
+        const token = data.token || 
+                     data.access_token || 
+                     data.accessToken ||
+                     data.data?.token ||
+                     data.data?.access_token;
         
-        if (user) {
-          dispatch(setCredentials({ user }));
-          dispatch(setAuthenticated({ isAuthenticated: true }));
+        const user = data.user || data.data?.user;
+        
+        if (token) {
+          dispatch(setToken({ token }));
+          
+          if (user) {
+            dispatch(setCredentials({ user }));
+            dispatch(setAuthenticated({ isAuthenticated: true }));
+          }
+          
+          await new Promise(resolve => setTimeout(resolve, 100));
         }
         
-        await new Promise(resolve => setTimeout(resolve, 100));
+        const userResponse = await getActiveUser();
+        if (userResponse?.data) {
+          navigate(PRIVATE_NAVIGATION.dashboard.view.path);
+        } else if (userResponse?.error) {
+          console.error('Failed to get user data:', userResponse.error);
+        }
       }
-      
-      const userResponse = await getActiveUser();
-      if (userResponse?.data) {
-        navigate(PRIVATE_NAVIGATION.dashboard.view.path);
-      } else if (userResponse?.error) {
-        console.error('Failed to get user data:', userResponse.error);
-      }
+    } finally {
+      isSubmitting.current = false;
     }
   };
 

@@ -1,0 +1,60 @@
+/* datatable css starts */
+.main-table {
+  @apply bg-white p-4 rounded-md border relative border-solid border-LightWood/80;
+}
+.custom-table-header {
+  @apply before:absolute before:top-[-10px] before:left-0 before:w-full before:h-[16px] before:bg-white before:z-[9];
+}
+.datatable-main {
+  @apply table-auto border-separate border-spacing-y-1.5;
+}
+.datatable-main td,
+.datatable-main th {
+  @apply bg-white first:border-s last:border-e border-y border-solid border-LightGray/[0.1] p-2;
+}
+.custom-table-header {
+  @apply sticky top-0 z-[10] transition-all duration-300;
+}
+.datatable-main tr td,
+.datatable-main tr th {
+  @apply first:rounded-l-md last:rounded-r-md 2xl:max-w-full max-w-[200px] last:max-w-full;
+}
+.datatable-main tr {
+  @apply rounded-xl;
+}
+.datatable-main tr .dndicon {
+  @apply block opacity-30 text-primary/60 cursor-grab active:cursor-grabbing;
+}
+.datatable-main tr td {
+  @apply text-lg leading-12 text-black font-medium py-2 2xl:px-4 px-3 border border-solid border-LightGray border-x-0 first:border-l last:border-r;
+}
+.datatable-main tr .td-child {
+  @apply flex text-base font-normal items-center text-black 2xl:whitespace-nowrap;
+}
+.datatable-main th .td-child {
+  @apply text-black;
+}
+.datatable-main th {
+  @apply text-lg leading-12 text-black font-medium py-4 2xl:px-4 px-3 bg-LightGray text-left;
+}
+.header-title-wrap {
+  @apply flex justify-between items-center mb-4;
+}
+.table-header-title {
+  @apply text-[22px] font-semibold text-black leading-normal;
+}
+.pagination-show-count p {
+  @apply text-sm text-primary font-medium;
+}
+.table-footer {
+  @apply flex justify-between items-center mt-5;
+}
+.bulk-select-bar {
+  @apply sticky top-[150px] z-[11] flex gap-18px items-center text-base font-medium text-white bg-PrimaryWood py-2 px-4 rounded-5px mb-3;
+}
+.bulk-select-count {
+  @apply inline-block mr-auto;
+}
+.bulk-select-bar button {
+  @apply underline underline-offset-2 hover:opacity-50 hover:text-black transition-all duration-300;
+}

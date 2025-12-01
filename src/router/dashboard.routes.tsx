@@ -4,7 +4,7 @@ import { RouteObjType } from './routes';
 
 // Lazy imports
 const Home = React.lazy(() => import('../modules/Dashboard/Home'));
-const ManageUsers = React.lazy(() => import('../modules/Management/pages/ManageUsers'));
+const ManageUsers = React.lazy(() => import('../modules/ManageUsers'));
 
 const DashboardRoutes: RouteObjType[] = [
   {

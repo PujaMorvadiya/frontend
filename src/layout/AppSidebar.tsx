@@ -1,4 +1,4 @@
-import { JSX, useCallback, useEffect, useRef, useState } from "react";
+import { JSX, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router";
 import {
   BoxCubeIcon,
@@ -192,17 +192,19 @@ const AppSidebar: React.FC = () => {
     if (!submenuMatched) setOpenSubmenu(null);
   }, [location.pathname, menuItems, isActive]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (openSubmenu !== null) {
       const key = `main-${openSubmenu.index}`;
-      if (subMenuRefs.current[key]) {
+      const element = subMenuRefs.current[key];
+      if (element) {
+        const height = element.scrollHeight;
         setSubMenuHeight((prev) => ({
           ...prev,
-          [key]: subMenuRefs.current[key]?.scrollHeight || 0,
+          [key]: height,
         }));
       }
     }
-  }, [openSubmenu]);
+  }, [openSubmenu, isExpanded, isHovered, isMobileOpen]);
 
   const toggleSubMenu = (index: number) => {
     setOpenSubmenu((p) => (p?.index === index ? null : { index }));
@@ -268,7 +270,7 @@ const AppSidebar: React.FC = () => {
           )}
 
           {/* Submenu */}
-          {nav.subItems && (isExpanded || isHovered || isMobileOpen) && (
+          {nav.subItems && (
             <div
               ref={(el) => {
                 subMenuRefs.current[`main-${index}`] = el;
@@ -276,7 +278,7 @@ const AppSidebar: React.FC = () => {
               className="overflow-hidden transition-all duration-300"
               style={{
                 height:
-                  openSubmenu?.index === index
+                  openSubmenu?.index === index && (isExpanded || isHovered || isMobileOpen)
                     ? `${subMenuHeight[`main-${index}`]}px`
                     : "0px",
               }}
