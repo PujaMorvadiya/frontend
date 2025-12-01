@@ -26,7 +26,7 @@
   @apply block opacity-30 text-primary/60 cursor-grab active:cursor-grabbing;
 }
 .datatable-main tr td {
-  @apply text-lg leading-12 text-black font-medium py-2 2xl:px-4 px-3 border border-solid border-LightGray border-x-0 first:border-l last:border-r;
+  @apply text-lg leading-relaxed text-black font-medium py-2 2xl:px-4 px-3 border border-solid border-LightGray border-x-0 first:border-l last:border-r;
 }
 .datatable-main tr .td-child {
   @apply flex text-base font-normal items-center text-black 2xl:whitespace-nowrap;
@@ -35,7 +35,7 @@
   @apply text-black;
 }
 .datatable-main th {
-  @apply text-lg leading-12 text-black font-medium py-4 2xl:px-4 px-3 bg-LightGray text-left;
+  @apply text-lg leading-relaxed text-black font-medium py-4 2xl:px-4 px-3 bg-LightGray text-left;
 }
 .header-title-wrap {
   @apply flex justify-between items-center mb-4;
@@ -50,7 +50,7 @@
   @apply flex justify-between items-center mt-5;
 }
 .bulk-select-bar {
-  @apply sticky top-[150px] z-[11] flex gap-18px items-center text-base font-medium text-white bg-PrimaryWood py-2 px-4 rounded-5px mb-3;
+  @apply sticky top-[150px] z-[11] flex gap-[18px] items-center text-base font-medium text-white bg-PrimaryWood py-2 px-4 rounded-[5px] mb-3;
 }
 .bulk-select-count {
   @apply inline-block mr-auto;

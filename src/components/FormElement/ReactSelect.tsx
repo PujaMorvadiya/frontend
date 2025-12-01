@@ -11,9 +11,9 @@ import ErrorMessage from './ErrorMessage';
 // ** style constants **
 import Button from 'components/Button/Button';
 import Image from 'components/Image';
-import { useDebounce } from 'utils';
 import { DropdownLoaderTypes, SelectStyle } from './constants/reactSelect';
 import './style/filterSelectCategory.css';
+import { useDebounce } from 'modules/utils';
 
 const { Option } = components;
 const IconOption = (props: any) => {
@@ -263,9 +263,8 @@ const ReactSelect = (props: IReactSelect) => {
             isClearable={isClearable}
             menuPlacement={menuPlacement}
             isDisabled={disabled}
-            className={`select-wrap ${className ?? ''} ${
-              disabled ? 'disabled' : ''
-            }`}
+            className={`select-wrap ${className ?? ''} ${disabled ? 'disabled' : ''
+              }`}
             menuPortalTarget={document.body}
             isLoading={isLoading ?? loader}
             styles={SelectStyle as StylesConfig<IObjectOption, boolean> | undefined}
@@ -293,13 +292,12 @@ const ReactSelect = (props: IReactSelect) => {
           {isCompulsory && rest?.name ? <ErrorMessage name={rest?.name} /> : ''}
           {isMulti && (
             <div
-              className={`multi-select-wrap  ${
-                getValue() &&
-                Array.isArray(getValue()) &&
-                (getValue() as IOptions[]).length > 0
+              className={`multi-select-wrap  ${getValue() &&
+                  Array.isArray(getValue()) &&
+                  (getValue() as IOptions[]).length > 0
                   ? 'pt-3'
                   : ''
-              }`}
+                }`}
             >
               {propOptions.length > 0 &&
                 propOptions.map((data: IOptions, index: number) => {

@@ -1,5 +1,4 @@
 import ToolTip from 'components/Tooltip';
-import { t } from 'i18next';
 import { ChangeEventHandler } from 'react';
 
 interface ISwitch {
@@ -45,9 +44,8 @@ const Switch = ({
       )}
 
       <div
-        className={`relative overflow-hidden ${
-          small !== undefined && small ? 'w-10 h-6' : ' w-12 h-8'
-        }`}
+        className={`relative overflow-hidden ${small !== undefined && small ? 'w-10 h-6' : ' w-12 h-8'
+          }`}
       >
         <input
           type="checkbox"
@@ -58,15 +56,14 @@ const Switch = ({
           disabled={disabled}
           onChange={onChangeHandler}
           onClick={onClickHandler}
-          aria-label={checked ? t('Toggle.On') : t('Toggle.Off')}
+          aria-label={checked ? 'ON' : 'OFF'}
         />
         <span className="inline-block w-full h-full rounded-full bg-gray-300/70 peer-checked:bg-PrimaryGreen transition-all duration-300" />
         <span
-          className={`${
-            small
+          className={`${small
               ? 'w-5 h-5 peer-checked:left-[18px]'
               : 'w-[26px] h-[26px] peer-checked:left-5'
-          } pointer-events-none inline-block absolute bg-white rounded-full left-0.5 top-1/2 -translate-y-1/2 shadow-lg shadow-black/10 transition-all duration-300`}
+            } pointer-events-none inline-block absolute bg-white rounded-full left-0.5 top-1/2 -translate-y-1/2 shadow-lg shadow-black/10 transition-all duration-300`}
         />
         {switchLabel && small !== undefined && !small && (
           <>

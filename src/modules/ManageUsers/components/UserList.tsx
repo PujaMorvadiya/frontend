@@ -5,7 +5,6 @@ import Switch from 'components/FormElement/Switch';
 import Image from 'components/Image';
 import Table from 'components/Table/Table';
 
-
 // ** Hooks **
 import {
     useAxiosDelete,
