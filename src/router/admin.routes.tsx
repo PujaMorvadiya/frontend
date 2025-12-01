@@ -12,8 +12,8 @@ const Error404 = React.lazy(() => import("../modules/Auth/pages/NotFound"));
 const LineChart = React.lazy(() => import("../modules/Charts/LineChart"));
 const BarChart = React.lazy(() => import("../modules/Charts/BarChart"));
 const ManageUsers = React.lazy(() => import("../modules/ManageUsers"));
-const ManageOrganizations = React.lazy(() => import("../modules/Management/pages/ManageOrganizations"));
-const EditOrganization =React.lazy(() => import("../modules/Management/pages/ManageOrganizations/editorg"));
+const ManageOrganizations = React.lazy(() => import("../modules/ManageUsers"));
+const EditOrganization = React.lazy(() => import("../modules/ManageOrganizations/editorg"));
 const BlankPage = React.lazy(() => import("../modules/Blank"));
 const Alerts = React.lazy(() => import("../modules/UiElements/Alerts"));
 

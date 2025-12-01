@@ -22,14 +22,14 @@ import { currentPageSelector } from 'reduxStore/slices/paginationSlice';
 
 // ** Types **
 import { CellProps, ITableHeaderProps } from 'components/Table/types';
-import { VITE_DATE_FORMAT } from 'config';
 import { format } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
-import EmailRender from './EmailRender';
 import { getDateDifference, TABLE_DATA_LIMIT, useDebounce } from 'modules/utils';
 import { Roles, StatusEnum } from 'constant/common.constant';
 import { IUserListResponse, Organization, User, UserListProps } from '../types';
 import UserProfile from 'components/Icon/assets/UserProfile';
+import EmailRender from './EmailRender';
+import { VITE_DATE_FORMAT } from 'config';
 
 const UserList = ({
     search,
@@ -360,19 +360,22 @@ const UserList = ({
         {
             header: 'Name',
             name: 'first_name',
-            cell: (props) => (
-                <UserProfile
-                    user={
-                        !!isDeletedUser && props?.deleted_metadata
-                            ? {
-                                first_name: props.deleted_metadata?.first_name,
-                                last_name: props.deleted_metadata?.last_name,
-                                profile_image: props.profile_image,
-                            }
-                            : props
+            cell: (props: any) => {
+                const userData = !!isDeletedUser && props?.deleted_metadata
+                    ? {
+                        first_name: props.deleted_metadata?.first_name,
+                        last_name: props.deleted_metadata?.last_name,
+                        profile_image: props.profile_image,
                     }
-                />
-            ),
+                    : (props as User);
+
+                return (
+                    <div className="flex items-center gap-2">
+                        <UserProfile />
+                        <span>{userData.first_name} {userData.last_name}</span>
+                    </div>
+                );
+            },
             option: {
                 sort: true,
                 hasFilter: false,

@@ -17,26 +17,26 @@ const RequiresUnAuth = () => {
   const { token } = useSelector(getAuthToken);
   const pathKeys = Object.keys(PUBLIC_NAVIGATION);
   const { getActiveUser } = getActiveUserDataApi();
-  const apiCallAttempted = useRef(false);
+  const lastTokenRef = useRef<string | null>(null);
+  const isCallingRef = useRef(false);
 
-  const getUserData = async () => {
-    if (
+  useEffect(() => {
+    const shouldFetch = 
       token &&
       !isAuthenticated &&
       !window.location.href.includes(PUBLIC_NAVIGATION.somethingWentWrong) &&
-      !apiCallAttempted.current
-    ) {
-      apiCallAttempted.current = true;
-      await getActiveUser();
-    }
-  };
+      lastTokenRef.current !== token &&
+      !isCallingRef.current;
 
-  useEffect(() => {
-    getUserData();
-    return () => {
-      apiCallAttempted.current = false;
-    };
-  }, []);
+    if (shouldFetch) {
+      isCallingRef.current = true;
+      lastTokenRef.current = token;
+      
+      getActiveUser().finally(() => {
+        isCallingRef.current = false;
+      });
+    }
+  }, [token, isAuthenticated, getActiveUser]);
 
   if (
     token &&
