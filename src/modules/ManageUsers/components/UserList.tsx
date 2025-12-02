@@ -13,7 +13,7 @@ import {
     useAxiosPost,
 } from 'hooks/useAxios';
 import { useModal } from 'hooks/useModal';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 // ** Redux **
 import { useSelector } from 'react-redux';
@@ -44,28 +44,23 @@ const UserList = ({
 
     // ** State & Variables **
     const [userData, setUserData] = useState<IUserListResponse>();
+    console.log("🚀 ~ UserList ~ userData:", userData)
     const [limit, setLimit] = useState(TABLE_DATA_LIMIT);
     const [sort, setSort] = useState<string>(
         isDeletedUser ? '-deleted_at' : '-created_at'
     );
     const [selectedUsers, setSelectedUsers] = useState<Array<string>>([]);
-    // const [isAllSelected, setIsAllSelected] = useState(false);
     const [isAllSelected, setIsAllSelected] = useState<boolean | 'partial'>(false);
 
     // ** API **
     const [getApi, { isLoading: apiLoading }] = useAxiosGet();
     const [updateUser] = useAxiosPatch();
     const [deleteUser, { isLoading: isDeleteUserLoading }] = useAxiosDelete();
-    const [callPostApi, { isLoading: isPostLoading }] = useAxiosPost();
     const [
         resendParentalConsentMailApi,
         { isLoading: resendParentalConsentMailApiLoading },
     ] = useAxiosPatch();
     const [userId, setUserId] = useState<string>('');
-    const handleResendInvite = async () => {
-        await callPostApi(`/users/${userId}/re-invite`, {});
-        await fetchData();
-    };
 
     const selectOrganizationModal = useModal();
     const deleteUserModal = useModal();
@@ -78,13 +73,11 @@ const UserList = ({
             params: {
                 page: currentPage,
                 sort,
-                userType,
-                userStatus: status,
                 limit,
-                search: debounceSearch,
+                ...(debounceSearch && { search: debounceSearch }),
                 ...(isDeletedUser && { isDeletedUser }),
                 ...(debounceSearch &&
-                    searchOn?.length && { searchParams: searchOn?.join(',') }),
+                    searchOn?.length && { searchOn }),
             },
         });
         setUserData(data?.data);
@@ -163,7 +156,7 @@ const UserList = ({
                             resendInviteModal.openModal();
                         }}
                         small
-                        isLoading={isPostLoading && userId === user.id}
+                        isLoading={userId === user.id}
                     >
                         ResendInvite
                     </Button>
