@@ -44,7 +44,6 @@ const UserList = ({
 
     // ** State & Variables **
     const [userData, setUserData] = useState<IUserListResponse>();
-    console.log("🚀 ~ UserList ~ userData:", userData)
     const [limit, setLimit] = useState(TABLE_DATA_LIMIT);
     const [sort, setSort] = useState<string>(
         isDeletedUser ? '-deleted_at' : '-created_at'
