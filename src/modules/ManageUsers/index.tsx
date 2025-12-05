@@ -56,7 +56,7 @@ const ManageUsers = () => {
         </div>
       </PageHeader>
       <div>
-        <div className="flex gap-4 mb-4">
+        {/* <div className="flex gap-4 mb-4">
           <ReactSelect
             selectedValue={userType}
             onChange={(option) => {
@@ -75,7 +75,7 @@ const ManageUsers = () => {
             options={statusFilter}
             label='Status'
           />
-        </div>
+        </div> */}
         <UserList search={search} userType={userType} status={status} isAdmin />
       </div>
     </>

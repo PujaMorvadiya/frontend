@@ -5,7 +5,19 @@ import svgr from "vite-plugin-svgr";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
-    react(),
+    react({
+      babel: {
+        plugins: [
+          // other Babel plugins
+          [
+            "@locator/babel-jsx/dist",
+            {
+              env: "development",
+            },
+          ],
+        ],
+      },
+    }),
     svgr({
       svgrOptions: {
         icon: true,
