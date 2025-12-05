@@ -245,9 +245,9 @@ function Table<DataType>({
                       <>
                         <tr
                           role="button"
-                          // onClick={() => {
-                          //   tableRowClick?.(row);
-                          // }}
+                          onClick={() => {
+                            tableRowClick?.(row);
+                          }}
                           key={`tr_${rowId}`}
                         >
                           {headerData?.map((columnCell) => {

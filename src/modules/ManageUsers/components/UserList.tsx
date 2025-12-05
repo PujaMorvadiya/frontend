@@ -221,9 +221,6 @@ const UserList = ({
     };
 
     const renderOrganizationData = (organizations: Organization[]) => {
-        if (!organizations || organizations.length === 0) {
-            return '-';
-        }
         if (organizations.length > 1) {
             return `${organizations[0]?.organizationInfo?.full_name} +${organizations.length - 1} more`;
         }

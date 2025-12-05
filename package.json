@@ -59,7 +59,6 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
-    "@locator/babel-jsx": "^0.5.1",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^24.10.1",
     "@types/react": "^19.0.8",
