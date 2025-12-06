@@ -12,7 +12,8 @@ import { Roles } from 'constant/common.constant';
 import { PRIVATE_NAVIGATION } from 'constant/navigation.constant';
 
 const EditUser = () => {
-  const { id } = useParams();
+  const { userId } = useParams();
+  console.log("🚀 ~ EditUser ~ userId:", userId)
   const navigate = useNavigate();
 
   const [user, setUser] = useState<AuthUserType>();
@@ -30,7 +31,7 @@ const EditUser = () => {
   const getUserDetails = async () => {
     const response = await callGetApi('/users/view', {
       params: {
-        user_id: id,
+        user_id: userId,
       },
     });
     if (response?.data) setUser(response.data);
@@ -43,15 +44,17 @@ const EditUser = () => {
       email: values.email,
     };
 
-    const { error } = await callPutApi(`/users/${id}/update`, data);
+    const { error } = await callPutApi(`/users/${userId}/update`, data);
     if (!error) {
       navigate(`/admin${PRIVATE_NAVIGATION.users.view.path}`);
     }
   };
 
   useEffect(() => {
-    getUserDetails();
-  }, [id]);
+    if (userId) {
+      getUserDetails();
+    }
+  }, [userId]);
 
   useEffect(() => {
     setInitialValues({

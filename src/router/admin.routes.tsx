@@ -13,6 +13,8 @@ const LineChart = React.lazy(() => import("../modules/Charts/LineChart"));
 const BarChart = React.lazy(() => import("../modules/Charts/BarChart"));
 const ManageUsers = React.lazy(() => import("../modules/ManageUsers"));
 const ManageOrganizations = React.lazy(() => import("../modules/ManageUsers"));
+const EditUser = React.lazy(() => import("../modules/ManageUsers/pages/EditUser"));
+const ViewUser = React.lazy(() => import("../modules/ManageUsers/pages/ViewUser"));
 const EditOrganization = React.lazy(() => import("../modules/ManageOrganizations/editorg"));
 const BlankPage = React.lazy(() => import("../modules/Blank"));
 const Alerts = React.lazy(() => import("../modules/UiElements/Alerts"));
@@ -67,6 +69,22 @@ const AdminRoutes: RouteObjType[] = [
   {
     element: <ManageUsers />,
     ...AdminNavigation.manageUsers.list,
+  },
+  {
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <EditUser />
+      </Suspense>
+    ),
+    ...AdminNavigation.manageUsers.edit,
+  },
+  {
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <ViewUser />
+      </Suspense>
+    ),
+    ...AdminNavigation.manageUsers.view,
   },
   {
     element: <ManageOrganizations />,

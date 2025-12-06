@@ -154,22 +154,22 @@ export const AdminNavigation = Object.freeze({
   },
   manageUsers: {
     list: {
-      path: '/admin/users',
+      path: '/admin/manage-users',
       feature: FeatureEnum.User,
       permission: PermissionEnum.View,
     },
     view: {
-      path: '/admin/users/:userId',
+      path: '/admin/manage-users/:userId/:role',
       feature: FeatureEnum.User,
       permission: PermissionEnum.View,
     },
     edit: {
-      path: '/admin/users/:userId/edit',
+      path: '/admin/manage-users/:userId/edit',
       feature: FeatureEnum.User,
       permission: PermissionEnum.Update,
     },
     add: {
-      path: '/admin/users/add',
+      path: '/admin/manage-users/add',
       feature: FeatureEnum.User,
       permission: PermissionEnum.Create,
     },
