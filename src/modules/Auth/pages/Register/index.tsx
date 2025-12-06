@@ -8,6 +8,7 @@ import Checkbox from "components/FormElement/CheckBox";
 import Button from "components/Button/Button";
 import { useState } from "react";
 import Icon from "components/Icon";
+import ImageUpload from "components/FormElement/ImageUploader";
 
 
 export default function SignUpForm() {
@@ -15,6 +16,8 @@ export default function SignUpForm() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
   const navigate = useNavigate();
+  const [avatar, setAvatar] = useState<File | null>(null);
+
 
   const initialValues = {
     fname: "",
@@ -22,6 +25,7 @@ export default function SignUpForm() {
     email: "",
     password: "",
     confirm_password: "",
+    profile_image: "",
     agree: false,
   };
 
@@ -31,6 +35,7 @@ export default function SignUpForm() {
     formData.append("last_name", values.lname.trim());
     formData.append("email", values.email.trim());
     formData.append("password", values.password.trim());
+    formData.append("profile_image", values.profile_image);   // <-- fieldName must match multer
 
     const { data, error } = await createUserApi("/auth/register", formData);
 
@@ -55,8 +60,18 @@ export default function SignUpForm() {
             validationSchema={RegisterValidationSchema}
             onSubmit={onSubmit}
           >
-            {({ values, handleChange, setFieldTouched, handleBlur }) => (
+            {({ values, setFieldValue, handleChange, setFieldTouched, handleBlur }) => (
               <Form>
+                <ImageUpload
+                  fieldName="profile_image"
+                  endpoint="/auth/upload-profile_image"
+                  onUpload={(url) => {
+                    console.log("Uploaded Image URL:", url);
+                    setFieldValue("profile_image", url);
+                  }}
+                />
+
+
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                   <InputField
                     parentClass="mb-5"
