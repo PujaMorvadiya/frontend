@@ -16,7 +16,6 @@ const ResetPassword = () => {
   } = formMethods;
 
   const OnSubmit = handleSubmit((data) => {
-    console.log('🚀 ~ ResetPassword ~ data:', data);
   });
 
   return (

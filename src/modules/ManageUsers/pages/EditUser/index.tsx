@@ -13,7 +13,6 @@ import { PRIVATE_NAVIGATION } from 'constant/navigation.constant';
 
 const EditUser = () => {
   const { userId } = useParams();
-  console.log("🚀 ~ EditUser ~ userId:", userId)
   const navigate = useNavigate();
 
   const [user, setUser] = useState<AuthUserType>();

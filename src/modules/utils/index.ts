@@ -32,7 +32,6 @@ export const logout = async (store: Store) => {
       Cookies.remove('navigate_after_login_url');
     }, 2000);
   } catch (error) {
-    console.log("🚀 ~ logout ~ error:", error)
     localStorage.clear();
   }
 };

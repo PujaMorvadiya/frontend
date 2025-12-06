@@ -16,7 +16,6 @@ const ForgotPassword = () => {
   } = formMethods;
 
   const OnSubmit = handleSubmit((userData: ForgotPasswordFormFields) => {
-    console.log('🚀 ~ ForgotPassword ~ userData:', userData);
   });
   return (
     <div>

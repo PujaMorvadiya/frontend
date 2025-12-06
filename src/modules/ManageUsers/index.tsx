@@ -56,26 +56,6 @@ const ManageUsers = () => {
         </div>
       </PageHeader>
       <div>
-        {/* <div className="flex gap-4 mb-4">
-          <ReactSelect
-            selectedValue={userType}
-            onChange={(option) => {
-              setUserType((option as { value: string }).value);
-              dispatch(currentPageCount({ currentPage: 1 }));
-            }}
-            options={[{ value: 'all', label: 'All' }, ...(roles ?? [])]}
-            label='User Type'
-          />
-          <ReactSelect
-            selectedValue={status}
-            onChange={(option) => {
-              setStatus((option as { value: string }).value);
-              dispatch(currentPageCount({ currentPage: 1 }));
-            }}
-            options={statusFilter}
-            label='Status'
-          />
-        </div> */}
         <UserList search={search} userType={userType} status={status} isAdmin />
       </div>
     </>

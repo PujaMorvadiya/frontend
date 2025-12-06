@@ -9,11 +9,10 @@ import Table from 'components/Table/Table';
 import {
     useAxiosDelete,
     useAxiosGet,
-    useAxiosPatch,
-    useAxiosPost,
+    useAxiosPut,
 } from 'hooks/useAxios';
 import { useModal } from 'hooks/useModal';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // ** Redux **
 import { useSelector } from 'react-redux';
@@ -29,6 +28,7 @@ import { IUserListResponse, Organization, User, UserListProps } from '../types';
 import UserProfile from 'components/Icon/assets/UserProfile';
 import EmailRender from './EmailRender';
 import { VITE_DATE_FORMAT } from 'config';
+import { ConfirmationPopup } from 'components/Modal/ConfirmationPopup';
 
 const UserList = ({
     search,
@@ -53,18 +53,11 @@ const UserList = ({
 
     // ** API **
     const [getApi, { isLoading: apiLoading }] = useAxiosGet();
-    const [updateUser] = useAxiosPatch();
+    const [updateUser] = useAxiosPut();
     const [deleteUser, { isLoading: isDeleteUserLoading }] = useAxiosDelete();
-    const [
-        resendParentalConsentMailApi,
-        { isLoading: resendParentalConsentMailApiLoading },
-    ] = useAxiosPatch();
-    const [userId, setUserId] = useState<string>('');
 
-    const selectOrganizationModal = useModal();
     const deleteUserModal = useModal();
     const searchString = typeof search === 'string' ? search : '';
-    const resendInviteModal = useModal();
     const debounceSearch = useDebounce(searchString, 300);
 
     const fetchData = async () => {
@@ -119,18 +112,7 @@ const UserList = ({
         }
     }, [selectedUsers, userData?.data]);
 
-    const resendParentalConsentMail = async (id: string) => {
-        await resendParentalConsentMailApi(
-            `/users/resend-parental-consent-mail/${id}`,
-            {}
-        );
-    };
-
     const handleViewUser = (user: User) => {
-        const { yearDiff, monthDiff, dayDiff } = getDateDifference(user.date_of_birth);
-        const isUnder13 =
-            yearDiff < 13 ||
-            (yearDiff === 13 && (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)));
 
         if (user.is_profile_created === false || isDeletedUser) {
             return (
@@ -148,37 +130,11 @@ const UserList = ({
                             <Image iconName="editPen" />
                         </Button>
                     ) : null}
-                    <Button
-                        variants="PrimaryWoodLightBorder"
-                        onClickHandler={() => {
-                            setUserId(user.id);
-                            resendInviteModal.openModal();
-                        }}
-                        small
-                        isLoading={userId === user.id}
-                    >
-                        ResendInvite
-                    </Button>
                 </div>
             );
         }
-        const deletedExp = `?isDeletedUser=${isDeletedUser}`;
         return (
             <div className="flex gap-2">
-                {isAdmin && isUnder13 ? (
-                    <Button
-                        className="action-button bg-LightGray  text-black"
-                        onClickHandler={(e) => {
-                            resendParentalConsentMail(user.id);
-                            e.stopPropagation();
-                        }}
-                        disabled={resendParentalConsentMailApiLoading}
-                        tooltipText='Resend Parental Consent'
-                        tooltipPosition="left"
-                    >
-                        <Image />
-                    </Button>
-                ) : null}
                 {isAdmin ? (
                     <Button
                         className="action-button blue"
@@ -192,20 +148,6 @@ const UserList = ({
                         <Image iconName="editPen" />
                     </Button>
                 ) : null}
-                <Button
-                    className="action-button green"
-                    onClickHandler={(e) => {
-                        e.stopPropagation();
-                        navigate(
-                            `/admin/manage-users/${user.id}/${user?.role?.role?.trim()?.toLowerCase()}${isDeletedUser ? deletedExp : ''}
-            `?.trim()
-                        );
-                    }}
-                    tooltipText='View'
-                    tooltipPosition="left"
-                >
-                    <Image iconName="eyeIcon" />
-                </Button>
             </div>
         );
     };
@@ -266,10 +208,10 @@ const UserList = ({
 
             return { ...prev, data };
         });
-        const { error } = await updateUser('/admin/update-user', {
-            user_id: user.id,
+        const data = {
             status: user.is_active ? StatusEnum.INACTIVE : StatusEnum.ACTIVE,
-        });
+        };
+        const { error } = await updateUser(`/users/${user.id}/update`, data);
 
         if (error) {
             setUserData(previousState);
@@ -431,11 +373,6 @@ const UserList = ({
         },
     ];
 
-    // const hasOrgRole = userData?.data?.some(
-    //     (data) =>
-    //         selectedUsers.includes(data.id) && data.role.role === Roles.Organization
-    // );
-
     return (
         <>
             {selectedUsers.length > 0 && (
@@ -443,11 +380,6 @@ const UserList = ({
                     <span className="bulk-select-count">
                         {selectedUsers.length} Users selected
                     </span>
-                    {/* {!hasOrgRole && (
-                        <Button onClickHandler={() => selectOrganizationModal.openModal()}>
-                            Add To Organization
-                        </Button>
-                    )} */}
 
                     <Button onClickHandler={() => deleteUserModal.openModal()}>
                         Delete
@@ -475,6 +407,18 @@ const UserList = ({
                 tableRowClick={handleRowClick}
             />
 
+            <ConfirmationPopup
+                modal={deleteUserModal}
+                cancelButtonFunction={() => {
+                    deleteUserModal.closeModal();
+                }}
+                deleteTitle='Delete User'
+                bodyText="Are you sure you want to delete this user ?"
+                cancelButtonText='Cancel'
+                confirmButtonText='Delete'
+                confirmButtonFunction={handleDeleteUser}
+                isLoading={isDeleteUserLoading}
+            />
         </>
     );
 };

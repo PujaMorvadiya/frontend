@@ -51,7 +51,6 @@ const PageHeader = ({
   };
   return (
     <div
-      // IF ROLE === ADMIN then add extra classes below " bg-LightGray sticky top-20 z-[11]"
       className={`${parentClass ?? ''} page-header p-5 transition-all duration-300 relative z-50`}
       id="pageHeader"
     >
