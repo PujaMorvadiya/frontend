@@ -10,6 +10,19 @@ export const Roles = Object.freeze({
   User: 'User',
 });
 
+export enum OrganizationTypeEnum {
+  CORPORATION = 'Corporation',
+  NON_PROFIT = 'Non-Profit',
+  GOVERNMENT = 'Government',
+  EDUCATIONAL = 'Educational',
+  HOSPITAL = 'Hospital',
+  TECHNOLOGY = 'Technology',
+  FINANCIAL = 'Financial',
+  RETAIL = 'Retail',
+  CONSULTING = 'Consulting',
+  STARTUP = 'Start-up',
+}
+
 export enum FeatureEnum {
   Permission = 'Permission',
   RolePermission = 'RolePermission',
