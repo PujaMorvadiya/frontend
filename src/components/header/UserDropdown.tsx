@@ -12,12 +12,14 @@ import { clearActiveSidebar, setActiveLayoutType } from "../../reduxStore/slices
 import { setRoles, setPermission, setRolePermission, setAccess } from "../../reduxStore/slices/rolePermissionSlice";
 import { PUBLIC_NAVIGATION } from "../../constant/navigation.constant";
 import { LayoutConstant } from "../../constant/common.constant";
+import { VITE_API_BASE_URL } from "config";
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector(getCurrentUser);
+
 
   function toggleDropdown() {
     setIsOpen(!isOpen);
@@ -32,17 +34,17 @@ export default function UserDropdown() {
     dispatch(clearToken());
     dispatch(clearActiveSidebar());
     dispatch(setActiveLayoutType(LayoutConstant.User));
-    
+
     dispatch(setRoles([]));
     dispatch(setPermission([]));
     dispatch(setRolePermission([]));
     dispatch(setAccess(['']));
-    
+
     localStorage.removeItem('persist:root');
     localStorage.clear();
-    
+
     closeDropdown();
-    
+
     navigate(PUBLIC_NAVIGATION.login);
   };
   return (
@@ -52,9 +54,9 @@ export default function UserDropdown() {
         className="flex items-center text-gray-700 dropdown-toggle dark:text-gray-400"
       >
         <span className="mr-3 overflow-hidden rounded-full h-11 w-11">
-          <img 
-            src={user?.profile_image || "/images/user/user-03.jpg"} 
-            alt={user?.full_name || user?.first_name || "User"} 
+          <img
+            src={user?.profile_image ? `${VITE_API_BASE_URL}${user?.profile_image}` : "/images/user/user-03.jpg"}
+            alt={user?.full_name || user?.first_name || "User"}
             className="w-full h-full object-cover"
           />
         </span>
@@ -63,9 +65,8 @@ export default function UserDropdown() {
           {user?.full_name || `${user?.first_name || ''} ${user?.last_name || ''}`.trim() || "User"}
         </span>
         <svg
-          className={`stroke-gray-500 dark:stroke-gray-400 transition-transform duration-200 ${
-            isOpen ? "rotate-180" : ""
-          }`}
+          className={`stroke-gray-500 dark:stroke-gray-400 transition-transform duration-200 ${isOpen ? "rotate-180" : ""
+            }`}
           width="18"
           height="20"
           viewBox="0 0 18 20"

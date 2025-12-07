@@ -35,7 +35,7 @@ export default function SignUpForm() {
     formData.append("last_name", values.lname.trim());
     formData.append("email", values.email.trim());
     formData.append("password", values.password.trim());
-    formData.append("profile_image", values.profile_image);   // <-- fieldName must match multer
+    formData.append("profile_image", values.profile_image);   
 
     const { data, error } = await createUserApi("/auth/register", formData);
 
@@ -62,15 +62,14 @@ export default function SignUpForm() {
           >
             {({ values, setFieldValue, handleChange, setFieldTouched, handleBlur }) => (
               <Form>
-                <ImageUpload
-                  fieldName="profile_image"
-                  endpoint="/auth/upload-profile_image"
-                  onUpload={(url) => {
-                    console.log("Uploaded Image URL:", url);
-                    setFieldValue("profile_image", url);
-                  }}
-                />
+                <div className="flex justify-center">
+                  <ImageUpload
+                    onUpload={(file) => {
+                      setFieldValue("profile_image", file);  
+                    }}
+                  />
 
+                </div>
 
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                   <InputField

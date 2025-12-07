@@ -1,91 +1,119 @@
 import React, { useState } from "react";
-import { useAxiosPost } from "hooks/useAxios";
 
 export type ImageUploadProps = {
-    endpoint?: string;            // API Endpoint
-    fieldName?: string;           // FormData field
-    previewSize?: number;         // width/height of image preview
-    autoUpload?: boolean;         // should upload immediately?
-    onUpload: (fileUrl: string) => void; // callback with file URL
-    children?: React.ReactNode;   // custom UI for upload button
+    previewSize?: number;
+    onUpload: (file: File | null) => void;
 };
 
 const ImageUpload: React.FC<ImageUploadProps> = ({
-    endpoint = "/upload/image",
-    fieldName = "image",
     previewSize = 120,
-    autoUpload = false,
     onUpload,
-    children,
 }) => {
-    const [file, setFile] = useState<File | null>(null);
     const [preview, setPreview] = useState<string | null>(null);
+    const [dragActive, setDragActive] = useState(false);
 
-    const [uploadImage, { isLoading }] = useAxiosPost();
+    const inputId = "image_upload_input";
 
-    const handleSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    // ---------------------------
+    // Handle File Selection
+    // ---------------------------
+    const handleSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
         const selected = e.target.files?.[0] ?? null;
-        setFile(selected);
+        if (!selected) return;
 
-        if (selected) {
-            setPreview(URL.createObjectURL(selected));
+        setPreview(URL.createObjectURL(selected));
+        onUpload(selected);
+    };
 
-            // Auto upload
-            if (autoUpload) {
-                await uploadFile(selected);
-            }
+    // ---------------------------
+    // Drag & Drop
+    // ---------------------------
+    const handleDrop = (e: React.DragEvent) => {
+        e.preventDefault();
+        setDragActive(false);
+
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+            const file = e.dataTransfer.files[0];
+            setPreview(URL.createObjectURL(file));
+            onUpload(file);
         }
     };
 
-    const uploadFile = async (selectedFile: File) => {
-        const form = new FormData();
-        form.append(fieldName, selectedFile);
-
-        const res = await uploadImage(endpoint, form);
-
-        if (res?.data?.success) {
-            onUpload(process.env.VITE_API_BASE_URL + res.data.fileUrl);
-        } else {
-            alert(res?.data?.message || "Upload failed");
-        }
+    const handleDrag = (e: React.DragEvent) => {
+        e.preventDefault();
+        setDragActive(e.type === "dragover");
     };
 
-    const handleManualUpload = async () => {
-        if (!file) return alert("Please select an image first!");
-        await uploadFile(file);
+    // ---------------------------
+    // Trigger file input
+    // ---------------------------
+    const triggerInput = () => {
+        const input = document.getElementById(inputId) as HTMLInputElement;
+        input?.click();
+    };
+
+    // ---------------------------
+    // Remove image
+    // ---------------------------
+    const handleRemove = (e: React.MouseEvent) => {
+        e.stopPropagation(); // Prevent triggering the file input
+        setPreview(null);
+        onUpload(null);
+
+        // Reset input value so user can re-select the same file
+        const input = document.getElementById(inputId) as HTMLInputElement;
+        if (input) input.value = "";
     };
 
     return (
-        <div className="space-y-3">
-            {preview && (
-                <img
-                    src={preview}
-                    width={previewSize}
-                    height={previewSize}
-                    className="rounded-full object-cover border shadow-sm"
-                    alt="preview"
-                />
-            )}
+        <div className="flex justify-center mb-8">
+            <div className="w-full max-w-sm bg-white shadow-lg rounded-xl p-6 text-center">
+                <h2 className="text-xl font-semibold text-gray-800">Upload your photo</h2>
 
-            <input
-                type="file"
-                accept="image/*"
-                className="block w-full cursor-pointer"
-                onChange={handleSelect}
-            />
-
-            {!autoUpload && (
-                <button
-                    type="button"
-                    className="px-4 py-2 mt-2 text-white bg-blue-600 rounded hover:bg-blue-700 disabled:bg-gray-400"
-                    disabled={isLoading}
-                    onClick={handleManualUpload}
+                <div
+                    onDrop={handleDrop}
+                    onDragOver={handleDrag}
+                    onDragLeave={handleDrag}
+                    onClick={triggerInput}
+                    className={`mt-5 relative flex flex-col items-center justify-center
+              border-2 border-dashed rounded-xl transition h-40 cursor-pointer
+              ${dragActive ? "border-blue-400 bg-blue-50" : "border-gray-300 bg-gray-50"}
+          `}
                 >
-                    {isLoading ? "Uploading..." : "Upload Image"}
-                </button>
-            )}
+                    {preview ? (
+                        <div className="relative">
+                            <img
+                                src={preview}
+                                alt="preview"
+                                style={{ width: previewSize, height: previewSize }}
+                                className="object-cover rounded-lg shadow-sm"
+                            />
+                            {/* Cancel button */}
+                            <button
+                                type="button"
+                                onClick={handleRemove}
+                                className="absolute top-1 right-1 bg-gray-800 text-white rounded-full w-6 h-6 flex items-center justify-center hover:bg-red-600"
+                            >
+                                &times;
+                            </button>
+                        </div>
+                    ) : (
+                        <>
+                            <p className="text-gray-500 text-sm">Drag & drop image</p>
+                            <p className="text-gray-400 text-xs mt-1">or click to upload</p>
+                        </>
+                    )}
 
-            {children}
+                    {/* Hidden file input */}
+                    <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        id={inputId}
+                        onChange={handleSelect}
+                    />
+                </div>
+            </div>
         </div>
     );
 };
