@@ -74,6 +74,11 @@ const getRoleBasedMenu = (activeLayout: string): NavItem[] => {
         path: AdminNavigation.calendar.view.path,
       },
       {
+        name: "Manage Availability",
+        icon: <CalenderIcon />,
+        path: AdminNavigation.calendar.view.path,
+      },
+      {
         name: "Settings",
         icon: <PlugInIcon />,
         path: AdminNavigation.settings.view.path,
@@ -221,14 +226,14 @@ const AppSidebar: React.FC = () => {
             <button
               onClick={() => toggleSubMenu(index)}
               className={`menu-item group ${openSubmenu?.index === index
-                  ? "menu-item-active"
-                  : "menu-item-inactive"
+                ? "menu-item-active"
+                : "menu-item-inactive"
                 }`}
             >
               <span
                 className={`menu-item-icon-size ${openSubmenu?.index === index
-                    ? "menu-item-icon-active"
-                    : "menu-item-icon-inactive"
+                  ? "menu-item-icon-active"
+                  : "menu-item-icon-inactive"
                   }`}
               >
                 {nav.icon}
@@ -239,8 +244,8 @@ const AppSidebar: React.FC = () => {
                   <span className="menu-item-text">{nav.name}</span>
                   <ChevronDownIcon
                     className={`ml-auto w-5 h-5 transition-transform ${openSubmenu?.index === index
-                        ? "rotate-180 text-brand-500"
-                        : ""
+                      ? "rotate-180 text-brand-500"
+                      : ""
                       }`}
                   />
                 </>
@@ -255,8 +260,8 @@ const AppSidebar: React.FC = () => {
               >
                 <span
                   className={`menu-item-icon-size ${isActive(nav.path)
-                      ? "menu-item-icon-active"
-                      : "menu-item-icon-inactive"
+                    ? "menu-item-icon-active"
+                    : "menu-item-icon-inactive"
                     }`}
                 >
                   {nav.icon}
@@ -289,8 +294,8 @@ const AppSidebar: React.FC = () => {
                     <Link
                       to={sub.path}
                       className={`menu-dropdown-item ${isActive(sub.path)
-                          ? "menu-dropdown-item-active"
-                          : "menu-dropdown-item-inactive"
+                        ? "menu-dropdown-item-active"
+                        : "menu-dropdown-item-inactive"
                         }`}
                     >
                       {sub.name}

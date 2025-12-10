@@ -1,7 +1,5 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { FeatureEnum, LayoutConstant, Roles } from 'constant/common.constant';
 import { useAxiosGet } from 'hooks/useAxios';
-import { isURLSame } from 'modules/utils';
 import { useDispatch } from 'react-redux';
 import {
   setAuthenticated,
@@ -17,6 +15,7 @@ import {
   setRoles,
 } from 'reduxStore/slices/rolePermissionSlice';
 import AdminUserRoutes from '../../../router/adminUser.routes';
+import { isURLSame } from 'utils/index';
 
 // Get Active User Data Api
 export const getActiveUserDataApi = () => {

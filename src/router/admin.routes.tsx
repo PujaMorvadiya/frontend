@@ -33,6 +33,10 @@ const AdminRoutes: RouteObjType[] = [
     element: <Calendar />,
   },
   {
+    ...AdminNavigation.manageAvailability.view,
+    element: <Calendar />,
+  },
+  {
     ...PRIVATE_NAVIGATION.profile.view,
     element: <UserProfile />,
   },

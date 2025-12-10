@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { currentPageSelector } from 'reduxStore/slices/paginationSlice';
 import './style/table.css';
-import { customRandomNumberGenerator } from 'modules/utils';
+import { customRandomNumberGenerator } from 'utils';
 
 function Table<DataType>({
   bodyData = [],

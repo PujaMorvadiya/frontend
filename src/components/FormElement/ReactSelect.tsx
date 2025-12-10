@@ -13,7 +13,7 @@ import Button from 'components/Button/Button';
 import Image from 'components/Image';
 import { DropdownLoaderTypes, SelectStyle } from './constants/reactSelect';
 import './style/filterSelectCategory.css';
-import { useDebounce } from 'modules/utils';
+import { useDebounce } from 'utils';
 
 const { Option } = components;
 const IconOption = (props: any) => {

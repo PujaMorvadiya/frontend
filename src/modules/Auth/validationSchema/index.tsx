@@ -1,5 +1,5 @@
 import { subYears } from 'date-fns';
-import { getDateDifference } from 'modules/utils';
+import { getDateDifference } from 'utils';
 import * as Yup from 'yup';
 
 // Email Validation

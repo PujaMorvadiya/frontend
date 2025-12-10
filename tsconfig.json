@@ -1,7 +1,12 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext", "ESNext.Intl"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext",
+      "ESNext.Intl"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -9,21 +14,32 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
     "baseUrl": "./src",
     "paths": {
-      "components/*": ["components/*"],
-      "modules/*": ["modules/*"],
-      "reduxStore/*": ["reduxStore/*"],
-      "hooks/*": ["hooks/*"],
-      "constant/*": ["constant/*"]
+      "components/*": [
+        "components/*"
+      ],
+      "modules/*": [
+        "modules/*"
+      ],
+      "reduxStore/*": [
+        "reduxStore/*"
+      ],
+      "hooks/*": [
+        "hooks/*"
+      ],
+      "constant/*": [
+        "constant/*"
+      ]
     }
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }
-

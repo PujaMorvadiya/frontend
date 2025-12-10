@@ -220,6 +220,13 @@ export const AdminNavigation = Object.freeze({
       permission: PermissionEnum.View,
     },
   },
+  manageAvailability: {
+    view: {
+      path: '/admin/manage-availability',
+      feature: FeatureEnum.Calendar,
+      permission: PermissionEnum.Create,
+    }
+  },
   settings: {
     view: {
       path: '/admin/settings',

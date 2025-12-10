@@ -22,7 +22,7 @@ import { currentPageSelector } from 'reduxStore/slices/paginationSlice';
 import { CellProps, ITableHeaderProps } from 'components/Table/types';
 import { format } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
-import { getDateDifference, TABLE_DATA_LIMIT, useDebounce } from 'modules/utils';
+import { getDateDifference, TABLE_DATA_LIMIT, useDebounce } from 'utils';
 import { Roles, StatusEnum } from 'constant/common.constant';
 import { IUserListResponse, Organization, User, UserListProps } from '../types';
 import UserProfile from 'components/Icon/assets/UserProfile';

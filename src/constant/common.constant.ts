@@ -96,3 +96,7 @@ export enum StatusEnum {
   ACTIVE = 'active',
   INACTIVE = 'inactive',
 }
+
+export enum AvailabilitiesTypeEnum {
+  LIVE_ASSESSMENT = 'Live Assessment',
+}

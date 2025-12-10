@@ -9,7 +9,7 @@ import Loaders from '../components/Loaders';
 import { PUBLIC_NAVIGATION } from '../constant/navigation.constant';
 import { getAuthToken } from '../reduxStore/slices/tokenSlice';
 import ErrorBoundary from '../modules/Auth/pages/ErrorBoundary';
-import { useRolePermission } from '../modules/utils';
+import { useRolePermission } from '../utils';
 
 import AuthRoutes from './auth.routes';
 import DashboardRoutes from './dashboard.routes';

@@ -1,12 +1,15 @@
 import { Store } from '@reduxjs/toolkit';
 import Cookies from 'js-cookie';
-import { PUBLIC_NAVIGATION } from '../../constant/navigation.constant';
-import { setLogoutData, setUserData } from '../../reduxStore/slices/authSlice';
-import { clearToken } from '../../reduxStore/slices/tokenSlice';
+import { PUBLIC_NAVIGATION } from '../constant/navigation.constant';
+import { setLogoutData, setUserData } from '../reduxStore/slices/authSlice';
+import { clearToken } from '../reduxStore/slices/tokenSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRolesPermission } from 'reduxStore/slices/rolePermissionSlice';
 import { useEffect, useState } from 'react';
 import { currentPageCount } from 'reduxStore/slices/paginationSlice';
+import { parseISO } from 'date-fns';
+import { format, utcToZonedTime } from 'date-fns-tz';
+import { TimeRange } from 'modules/TeacherAvailability/types';
 
 export const useRolePermission = (featureName: string, permissionName: string) => {
   const RolePermissions = useSelector(getRolesPermission);
@@ -95,3 +98,34 @@ export function useDebounce(value: string, delay: number) {
 }
 
 export const TABLE_DATA_LIMIT = 10;
+
+export const TIMEZONE: string =
+  Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
+
+export const formatDate = (value?: string | Date) => {
+  if (!value) return;
+  const dateObj = typeof value === 'string' ? parseISO(value) : value;
+  return dateObj;
+};
+
+export const getLocalDateOnly = (date: string, timeZone: string) => {
+  const zoned = utcToZonedTime(date, timeZone);
+  return format(zoned, 'yyyy-MM-dd');
+};
+
+// -------------------------------------- Use this function only for teacher availability: convertToLocalTime ------------------------------------------
+export const convertToLocalTime = (ranges: TimeRange[], timeZone: string) => {
+  return ranges.map((range) => {
+    const { start_time, end_time, timezone, availability_type } = range;
+
+    const startLocal = utcToZonedTime(start_time, timeZone);
+    const endLocal = utcToZonedTime(end_time, timeZone);
+
+    return {
+      start_time: format(startLocal, 'HH:mm:ss'),
+      end_time: format(endLocal, 'HH:mm:ss'),
+      timezone,
+      availability_type,
+    };
+  });
+};

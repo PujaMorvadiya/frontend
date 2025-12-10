@@ -2,7 +2,7 @@ import { useSortable } from '@dnd-kit/sortable';
 import Image from 'components/Image';
 import { JSXElementConstructor, ReactElement } from 'react';
 import { CellProps, ITableHeaderProps } from './types';
-import { customRandomNumberGenerator } from 'modules/utils';
+import { customRandomNumberGenerator } from 'utils';
 
 interface DraggableRowProps<DataType> {
   row: CellProps;

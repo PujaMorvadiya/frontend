@@ -1,0 +1,452 @@
+.calendars.disable {
+  @apply relative before:absolute before:content-[''] before:inset-0 before:w-full before:h-full before:z-[12];
+}
+
+.calendar-custom-toolbar {
+  @apply inline-block transition-all duration-300 pointer-events-none group-hover:opacity-100 opacity-0 group-hover:left-[calc(100%_+_5px)] absolute w-auto max-w-[200px] bg-primary text-white z-2 px-2 py-px text-sm font-normal font-sans rounded left-[calc(100%_-_20px)] before:absolute before:content-[''] before:border-r-8 before:border-y-8 before:border-y-transparent before:border-l-0 before:border-solid before:border-r-primary before:top-1/2 before:-translate-y-1/2 before:right-[calc(100%_-_4px)];
+}
+
+.rbc-overlay {
+  @apply rounded-lg max-h-[calc(100dvh_-_500px)] overflow-auto pt-0 flex flex-col gap-2 [&_:nth-child(2)]:mt-1.5;
+}
+.rbc-overlay-header {
+  @apply text-base  font-semibold pt-2.5 pb-2 sticky top-0 bg-white;
+}
+
+.rbc-overlay .rbc-event {
+  pointer-events: none;
+}
+
+.admin-month-view .rbc-row-segment:has(.rbc-event) {
+  @apply flex flex-wrap gap-1 bg-LightGray p-1;
+}
+.admin-month-view .rbc-event .rbc-event-content {
+  @apply w-full h-full;
+}
+.admin-month-view .rbc-event .rbc-event-content img {
+  @apply w-full h-full object-cover rounded-full;
+}
+
+/* EVENT POPOVER */
+.Courses-month-event-popover {
+  @apply !p-0 !w-fit !min-w-[400px];
+}
+.month-event-popover {
+  @apply bg-white rounded-10px shadow p-4 z-10 w-[550px] border border-solid border-LightWood;
+}
+
+.month-event-popover.true {
+  @apply w-[400px];
+}
+.month-event-popover h5 {
+  @apply text-black text-base font-medium leading-normal mb-2.5;
+}
+.month-event-popover h5 span {
+  @apply text-sm leading-normal font-medium text-PrimaryWood;
+}
+.teacher-profile-item {
+  @apply mb-2 last:mb-0 flex justify-between items-start border border-solid p-2.5 rounded-10px;
+}
+.teacher-profile-wrap {
+  @apply flex flex-wrap items-center gap-1 w-full;
+}
+.teacher-profile-image {
+  @apply w-30px h-30px;
+}
+.teacher-profile-image img {
+  @apply w-full h-full rounded-full object-cover;
+}
+.teacher-profile-text {
+  @apply text-black text-sm font-medium capitalize h-fit;
+}
+.teacher-profile-slot-list {
+  @apply ml-auto flex flex-col gap-1.5;
+}
+.teacher-profile-slot-item {
+  @apply px-2.5 py-1 bg-LightWood rounded-5px text-sm font-sans;
+}
+
+.course-event-popover-wrap {
+  @apply grid grid-cols-[178px_1fr] gap-5;
+}
+.course-event-popover-img {
+  @apply w-[178px] aspect-square flex items-center justify-center;
+}
+.course-event-popover-img img {
+  @apply w-full h-full rounded-5px object-contain object-center;
+}
+.course-event-popover-data {
+  @apply flex flex-col;
+}
+.course-event-popover-mode-wrap {
+  @apply flex gap-2 mb-0 flex-wrap;
+}
+.course-event-popover-mode {
+  @apply px-2 py-1 bg-LightWood text-PrimaryWood text-xs inline-block rounded-5px w-fit leading-12;
+}
+.month-course-view-event .course-event-popover-mode {
+  @apply bg-PrimaryWood text-white;
+}
+.course-event-popover-title {
+  @apply text-base font-medium text-primary mb-1;
+}
+.course-event-popover-date-time {
+  @apply flex items-center gap-5 mb-3 leading-12;
+}
+.course-event-popover-date-time > span {
+  @apply flex items-center gap-1.5 text-sm text-PrimaryWood;
+}
+.course-event-popover-date-time svg {
+  @apply w-5 h-5 text-PrimaryWood/60;
+}
+.course-event-popover-online-text {
+  @apply flex items-center gap-2 text-sm text-PrimaryBlue underline underline-offset-4 font-medium mb-3;
+}
+.course-event-popover-participants {
+  @apply bg-LightGray p-2.5 rounded-5px text-sm leading-12 font-medium;
+}
+.course-event-popover-bottom-bar {
+  @apply mt-2.5 pt-2.5 border-t border-solid border-LightGray flex gap-4;
+}
+.course-event-popover-bottom-bar > * {
+  @apply w-[30%] first:w-[40%];
+}
+.course-event-popover-session span {
+  @apply text-xs text-PrimaryWood leading-12 block mb-1.5;
+}
+.course-event-popover-session p {
+  @apply text-base text-primary leading-12;
+}
+
+/* ********************************************************************************* */
+/* CALENDAR */
+.admin-calendar .tab-header {
+  @apply bg-white p-5 rounded-5px;
+}
+.calendar-main-wrap {
+  @apply p-3 mt-3;
+}
+.rbc-calendar {
+  @apply !h-auto;
+}
+.rbc-month-row {
+  @apply min-h-[150px] h-auto;
+}
+.calendar-course-view .rbc-month-row:has(.rbc-event-content) {
+  @apply min-h-unset h-unset;
+}
+.calendar-main-title {
+  @apply block mb-2;
+}
+.rbc-month-row {
+  @apply !basis-unset flex-[unset];
+}
+.rbc-toolbar {
+  @apply flex flex-col flex-wrap justify-center text-base items-center !mb-18px;
+}
+.rbc-month-row + .rbc-month-row,
+.rbc-day-bg + .rbc-day-bg,
+.rbc-month-view,
+.rbc-header {
+  @apply border-none !border-0;
+}
+.rbc-header {
+  @apply bg-LightWood !py-2.5 rounded-none !font-normal font-matter;
+}
+.rbc-row-bg {
+  @apply gap-1;
+}
+.rbc-date-cell {
+  @apply flex items-center justify-end;
+}
+.rbc-day-bg {
+  @apply bg-white rounded-none;
+}
+.rbc-month-row .highlighted-day {
+  @apply !bg-LightWood;
+}
+.rbc-month-view {
+  @apply gap-1 bg-LightGray h-auto shadow-[0_0_0_1px] shadow-black/10 pt-0 p-0.5 rounded-b;
+}
+.rbc-today:not(.rbc-header),
+.rbc-date-cell.rbc-now:not(.rbc-header) {
+  @apply !bg-white;
+}
+.rbc-row:has(.rbc-row-segment) .rbc-row-segment {
+  @apply p-0 relative text-xs bg-transparent !max-w-unset;
+}
+.rbc-row-bg .event-day {
+  @apply relative;
+}
+.rbc-row-bg .event-day::before,
+.rbc-row-bg .event-day::after {
+  @apply absolute content-[''] w-full h-full bg-PrimaryWood top-0 right-0 rounded;
+}
+.rbc-row:has(.rbc-row-segment) .rbc-row-segment .rbc-event {
+  @apply bg-transparent;
+}
+.select-time-slot-wrap-title {
+  @apply text-base text-black mb-2 block mt-3;
+}
+.select-time-slot-wrap {
+  @apply flex gap-4 items-center;
+}
+.react-datepicker__input-container .inputField {
+  @apply rounded-10px;
+}
+.data-picker-wrap {
+  @apply border border-solid pe-3 border-LightGray bg-white rounded-5px flex items-center [&:has(.inputField:focus)]:ring-2 [&:has(.inputField:focus)]:ring-primary/20 [&:has(.inputField:focus)]:ring-offset-2 transition-all duration-300;
+}
+.rbc-show-more {
+  @apply text-xs leading-12 font-semibold my-2 text-black;
+}
+
+.react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list {
+  @apply !h-[calc(125px_+_1.7rem_/_2)];
+}
+
+.react-datepicker__time-list::-webkit-scrollbar {
+  @apply w-1.5 h-1.5;
+}
+.react-datepicker__time-list::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-black/50;
+}
+.react-datepicker__time-list::-webkit-scrollbar-track {
+  @apply rounded-full bg-LightGray;
+}
+.react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list
+  li.react-datepicker__time-list-item {
+  @apply !py-2 font-matter font-normal text-black/70;
+}
+.react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list
+  li.react-datepicker__time-list-item--selected {
+  @apply !bg-PrimaryWood !text-white !font-medium;
+}
+.react-datepicker__header {
+  @apply !bg-white !border-LightGray;
+}
+.react-datepicker {
+  @apply !border-0 shadow-searchBoxFilter;
+}
+.react-datepicker-popper[data-placement^='top'] .react-datepicker__triangle,
+.react-datepicker-popper[data-placement^='bottom'] .react-datepicker__triangle {
+  @apply !stroke-white !fill-white !text-white;
+}
+.has-event.rbc-date-cell {
+  @apply relative;
+}
+.error-message {
+  @apply text-sm font-medium block text-red-600 mt-1;
+}
+.react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list
+  li.react-datepicker__time-list-item--disabled {
+  @apply !text-black/50;
+}
+.spinnerLoad {
+  @apply flex items-center justify-center gap-2;
+}
+.month-teacher-view-event {
+  @apply py-1 text-black px-1 rounded-5px flex items-center;
+}
+.rbc-calendar .rbc-toolbar .view-switch-btn-wrap button {
+  @apply !px-5 !py-2.5 first:rounded-l-full last:rounded-r-full;
+}
+.view-switch-btn-wrap {
+  @apply rounded-full border border-solid border-PrimaryWood/20;
+}
+.view-switch-btn-wrap.rbc-toolbar button {
+  @apply !border-none;
+}
+.rbc-toolbar button:active,
+.rbc-toolbar button.rbc-active,
+.rbc-toolbar button.rbc-active:focus,
+.rbc-toolbar button:focus {
+  @apply bg-PrimaryWood text-white shadow-none;
+}
+.rbc-row-content > .rbc-row .rbc-row-segment:has([type='button']) {
+  @apply px-2;
+}
+.rbc-toolbar {
+  @apply mb-7 flex flex-wrap justify-between text-base items-center gap-y-4;
+}
+.rbc-current-content {
+  @apply flex items-center gap-7;
+}
+.rbc-current-content button {
+  @apply w-7 h-7 focus:ring-PrimaryWood/20 !border !border-solid border-primary/40 text-black/40 rounded-full !p-1;
+}
+.rbc-toolbar-label {
+  @apply flex-[1_0_0%] text-primary text-center font-semibold text-xl leading-6;
+}
+.rbc-current-content button svg {
+  @apply w-full h-full;
+}
+.rbc-today-button button {
+  @apply border border-solid border-PrimaryWood rounded-full py-2.5 text-base leading-none;
+}
+
+.rbc-time-content {
+  @apply border-t;
+}
+.month-course-view-event {
+  @apply p-1.5 bg-LightGray border border-solid border-PrimaryWood/20 rounded-5px h-full;
+}
+.month-course-view-event .inner {
+  @apply mb-2;
+}
+
+.month-course-view-event .inner > img {
+  @apply !w-8 !h-8 rounded-full object-cover;
+}
+.month-course-view-event_mode {
+  @apply text-xs leading-normal text-black font-medium max-w-[180px] truncate;
+}
+.month-course-view-event_time {
+  @apply bg-LightWood w-fit text-black py-1 px-1.5 rounded-5px text-xs;
+}
+.admin-week-view .rbc-time-view {
+  @apply border-l-0 border-b-0;
+}
+.admin-day-view .rbc-time-view,
+.admin-week-view .rbc-time-view {
+  @apply max-h-[calc(100vh-400px)] overflow-y-auto;
+}
+.admin-week-view .rbc-time-header,
+.admin-month-view .rbc-month-header {
+  @apply sticky top-0 z-10;
+}
+.admin-week-view .rbc-time-header-gutter {
+  @apply bg-white;
+}
+.admin-week-view .rbc-time-content {
+  @apply !overflow-hidden !min-w-max;
+}
+.admin-week-view .rbc-day-slot .rbc-event,
+.admin-week-view .rbc-day-slot .rbc-background-event {
+  @apply mb-2 !bg-transparent !p-0 !border-none !rounded-none;
+}
+.rbc-month-header .rbc-header,
+.rbc-time-header-cell .rbc-header {
+  @apply relative last:before:opacity-0;
+}
+.rbc-month-header {
+  @apply !gap-1;
+}
+.rbc-month-header .rbc-header::before,
+.rbc-time-header-cell .rbc-header::before {
+  @apply absolute content-[''] w-1 h-full -right-0.5 top-0 bg-white;
+}
+.rbc-time-view .rbc-allday-cell {
+  @apply hidden;
+}
+.rbc-day-slot .rbc-events-container {
+  @apply mx-1.5 border-0 overflow-x-auto overflow-y-hidden;
+}
+.rbc-time-view {
+  @apply border-t-0 border-l-0;
+}
+
+.rbc-events-container::-webkit-scrollbar {
+  display: none;
+}
+
+.rbc-time-view .rbc-day-slot .rbc-event,
+.rbc-time-view .rbc-day-slot .rbc-background-event {
+  @apply !bg-transparent !border-none !outline-none;
+  padding: 0px 5px;
+}
+
+.rbc-current-time-indicator {
+  @apply hidden;
+}
+
+.rbc-event:has(.__web-inspector-hide-shortcut__) {
+  @apply hidden;
+}
+.admin-day-view .course-event-popover-mode {
+  @apply mb-0;
+}
+.admin-day-view .month-course-view-event {
+  @apply flex items-start gap-2 h-full;
+}
+.admin-day-view .month-course-view-event .inner {
+  @apply mb-0;
+}
+.admin-day-view .month-course-view-event_time {
+  @apply h-fit ml-auto;
+}
+.admin-day-view .month-course-view-event_mode {
+  @apply text-sm;
+}
+
+.calendar-tab-wrap .tab-header .tab-items {
+  @apply w-fit before:hidden;
+}
+.calendar-tab-wrap .tab-header .tab-item {
+  @apply pb-0 before:-bottom-5;
+}
+.calendar-tab-wrap .tab-header {
+  @apply flex justify-between py-2;
+}
+
+/* CALENDAR FILTER */
+.calendar-filter-btn {
+  @apply w-10 h-10 p-1 text-white bg-primary rounded-full flex items-center justify-center;
+}
+.calendar-filter-wrap {
+  @apply relative;
+}
+.calendar-filter-options {
+  @apply flex flex-col items-start text-left absolute rounded-10px top-[calc(100%_+_20px)] right-0 bg-white z-2 w-[190px] drop-shadow-[0_-5px_20px_rgba(0,0,0,0.15)];
+}
+.calendar-filter-options::before {
+  @apply content-[''] absolute right-3 -top-3 border-x-[12px] border-x-transparent border-b-[12px] border-b-white;
+}
+.calendar-filter-options .option {
+  @apply py-3 px-5 w-full first:rounded-t-10px last:rounded-b-10px text-base leading-none text-left justify-start hover:bg-LightGray;
+}
+.calendar-filter-options .option.selected {
+  @apply bg-PrimaryWood text-white;
+}
+
+.courses-calendar-view .rbc-timeslot-group,
+.courses-calendar-view .rbc-timeslot-group {
+  @apply min-h-[52px];
+}
+
+.live-assessments-calendar-view .rbc-timeslot-group,
+.live-assessments-calendar-view .rbc-timeslot-group {
+  @apply min-h-[200px];
+}
+
+.admin-week-view .rbc-time-header-cell .rbc-header,
+.admin-week-view .rbc-day-slot .rbc-timeslot-group {
+  @apply !min-w-[200px];
+}
+
+.rbc-label .rbc-time-header-gutter {
+  @apply !max-w-[77px];
+}
+
+.manage-teachers-calendar-view .rbc-day-slot .rbc-event {
+  @apply !static !inset-0 !h-fit !w-full;
+}
+.manage-teachers-calendar-view .rbc-day-slot .rbc-event-content {
+  @apply min-h-fit;
+}
+.manage-teachers-calendar-view .rbc-time-gutter.rbc-time-column,
+.manage-teachers-calendar-view .rbc-time-header-gutter {
+  @apply hidden;
+}

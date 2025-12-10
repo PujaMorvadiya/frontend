@@ -5,7 +5,7 @@ import Checkbox from 'components/FormElement/CheckBox';
 import { IconTypes } from 'components/Icon/types';
 import Image from 'components/Image';
 import { Modal } from 'components/Modal/Modal';
-import { JSX } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 type PopUpProps = {
@@ -31,13 +31,16 @@ type PopUpProps = {
   setProfile?: React.Dispatch<React.SetStateAction<boolean>>;
   setDeleteAll?: React.Dispatch<React.SetStateAction<boolean>>;
   icon?: IconTypes;
+  confirmCheckbox?: boolean;
+  confirmCheckboxText?: string;
 
   popUpType?: 'success' | 'danger' | 'warning' | 'info' | 'logout';
-  optionalComponent?: () => JSX.Element;
+  optionalComponent?: () => React.ReactNode;
 };
 
 const PopupBody = ({ icon, popUpType, ...rest }: Omit<PopUpProps, 'modal'>) => {
   let renderIcon;
+  const [confirm, setConfirm] = useState<boolean>(!rest.confirmCheckbox);
   const IconsClass =
     'mb-5 w-20 h-20 mx-auto rounded-full flex items-center justify-center';
   switch (popUpType) {
@@ -170,6 +173,18 @@ const PopupBody = ({ icon, popUpType, ...rest }: Omit<PopUpProps, 'modal'>) => {
           ''
         )}
 
+        {rest.confirmCheckbox ? (
+          <Checkbox
+            parentClass="justify-center"
+            text={rest.confirmCheckboxText ?? 'Confirm'}
+            onChange={(e) => {
+              setConfirm(e.target.checked);
+              return rest.setProfile && rest.setProfile(e.target.checked);
+            }}
+          />
+        ) : (
+          ''
+        )}
         {rest.isSlotReoccurring ? (
           <Checkbox
             parentClass="justify-center mt-3 ms-1.5"
@@ -188,7 +203,6 @@ const PopupBody = ({ icon, popUpType, ...rest }: Omit<PopUpProps, 'modal'>) => {
               className="w-fit"
               onClickHandler={rest.cancelButtonFunction}
               variants="PrimaryWoodBorder"
-              // TODO: Review this state if affecting any other component
               disabled={rest.isLoading}
             >
               {rest.cancelButtonText}
@@ -200,7 +214,7 @@ const PopupBody = ({ icon, popUpType, ...rest }: Omit<PopUpProps, 'modal'>) => {
               onClickHandler={rest.confirmButtonFunction}
               variants={getButtonVariant(popUpType as string)}
               isLoading={rest.isLoading}
-              disabled={rest.isDisabled}
+              disabled={rest.isDisabled || !confirm}
             >
               {rest.confirmButtonText}
             </Button>
