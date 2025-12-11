@@ -5,7 +5,6 @@ import { useAxiosDelete } from 'hooks/useAxios';
 import { useModal } from 'hooks/useModal';
 import _ from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { usePopper } from 'react-popper';
 import { CalendarEvent, TabValueProps } from '../types';
 import CourseCustomEvent from './CourseCustomEvent';
@@ -31,9 +30,8 @@ const ShowMorePopover: React.FC<ShowMorePopoverProps> = ({
   const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
   const [selectedCourseId] = useState<string | null>(null);
   const popoverRef = useRef<HTMLDivElement | null>(null);
-  const { t } = useTranslation();
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
-    placement: 'bottom', // Adjust this as needed ('top', 'left', 'right', etc.)
+    placement: 'bottom',
   });
 
   const [deleteApi] = useAxiosDelete();
@@ -68,7 +66,7 @@ const ShowMorePopover: React.FC<ShowMorePopoverProps> = ({
       }}
       style={{
         ...styles.popper,
-        zIndex: 1000, // Ensure it appears above other elements
+        zIndex: 1000,
         backgroundColor: 'white',
         border: '1px solid #ccc',
         padding: '10px',
@@ -94,7 +92,6 @@ const ShowMorePopover: React.FC<ShowMorePopoverProps> = ({
                 className="teacher-profile-item min-w-[400px] gap-1"
               >
                 <div className="teacher-profile-wrap">
-                  {/* Teacher Profile Image */}
                   <div className="teacher-profile-image">
                     <Image
                       imgClassName="w-full h-full rounded-full"
@@ -106,13 +103,11 @@ const ShowMorePopover: React.FC<ShowMorePopoverProps> = ({
                       firstName={slotData?.data?.[0]?.user?.first_name}
                     />
                   </div>
-                  {/* Teacher Name */}
                   <span className="teacher-profile-text">
                     {slotData?.data?.[0]?.user?.full_name || slotData?.teacher_name}
                   </span>
                 </div>
 
-                {/* Available Slots */}
                 {slotData?.data && slotData.data.length > 0 ? (
                   <div className="teacher-profile-slot-list">
                     {slotData.data.map((event: CalendarEvent) => (
@@ -126,7 +121,7 @@ const ShowMorePopover: React.FC<ShowMorePopoverProps> = ({
                     ))}
                   </div>
                 ) : (
-                  <p>{t('Calendar.slots.notAvailable')}</p>
+                  <p>This Availability is already used fully!!!</p>
                 )}
               </div>
             ))}
@@ -157,10 +152,10 @@ const ShowMorePopover: React.FC<ShowMorePopoverProps> = ({
       <ConfirmationPopup
         showCloseIcon
         modal={deleteModal}
-        deleteTitle={`${t('OrganizationManagement.confirmText.Delete')}`}
-        bodyText={`${t('Settings.confirmMiniText.delete')}`}
-        cancelButtonText={`${t('Settings.cancel')}`}
-        confirmButtonText={`${t('Settings.delete')}`}
+        deleteTitle="Want to Delete?"
+        bodyText="This action is permanent and will completely delete the selected item. All associated data will be lost."
+        cancelButtonText="Cancel"
+        confirmButtonText="Delete"
         cancelButtonFunction={() => deleteModal.closeModal()}
         confirmButtonFunction={async () => {
           try {

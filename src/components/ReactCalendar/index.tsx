@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-syntax */
 import {
   addMinutes,
   endOfDay,
@@ -15,9 +14,7 @@ import { Calendar as BigCalendar, dateFnsLocalizer, View } from 'react-big-calen
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { EventPopover } from './Components/EventPopover';
 import ShowMorePopover from './Components/ShowMorePopover';
-// import './style/index.css';
 import { CustomEvent } from './Components/CustomEvent';
-import { CustomToolbar } from './Components/CustomToolbar';
 import {
   CalendarEvent,
   ReactCalendarProps,
@@ -67,7 +64,6 @@ const Calendar = ({
       params: {
         allAvailabilities: true,
         teacherId,
-        teacher_availability_type: filterValue?.teacher_availability_type,
       },
     });
     setTimeSlots(responseData.data);
@@ -95,7 +91,6 @@ const Calendar = ({
         allAvailabilities: true,
         view: true,
         showMore: true,
-        teacher_availability_type: filterValue?.teacher_availability_type,
       },
     });
     setDaySlots(responseData?.data);
@@ -111,9 +106,6 @@ const Calendar = ({
         start_date: date1,
         end_date: date2,
         view: true,
-        ...(JSON.stringify(filterValue?.course_type) !== '[]'
-          ? { course_type: JSON.stringify(filterValue?.course_type) }
-          : {}),
         ...(filterOption ? { course_mode: filterOption } : {}),
       },
     });
@@ -398,16 +390,16 @@ const Calendar = ({
               />
             );
           },
-          toolbar: (props: any) => {
-            return (
-              <CustomToolbar
-                {...props}
-                currentTab={currentTab}
-                filterOption={filterValue}
-                setFilterOption={setFilterRange}
-              />
-            );
-          },
+          // toolbar: (props: any) => {
+          //   return (
+          //     <CustomToolbar
+          //       {...props}
+          //       currentTab={currentTab}
+          //       filterOption={filterValue}
+          //       setFilterOption={setFilterRange}
+          //     />
+          //   );
+          // },
         }}
         formats={{
           dayFormat: (date, culture) => {

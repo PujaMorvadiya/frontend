@@ -1,9 +1,8 @@
 import 'components/ReactCalendar/style/index.css';
 import { format } from 'date-fns';
-import { t } from 'i18next';
 import React from 'react';
 import { SlotsPopoverProps } from '../types';
-import TeacherAvailabilityCustom from './TeacherAvailabilityCustom';
+import TeacherAvailabilityCustom from './AvailabilityCustom';
 
 const SlotsPopover: React.FC<SlotsPopoverProps> = ({
   event,
@@ -21,7 +20,7 @@ const SlotsPopover: React.FC<SlotsPopoverProps> = ({
   return (
     <div className="teacher-event-popover">
       <h5 className="">
-        {t('Calendar.modal.popupText')}&nbsp;
+        Availability &nbsp;
         <span>({format(event?.start, 'dd, MMM')})</span>
       </h5>
 
@@ -35,7 +34,7 @@ const SlotsPopover: React.FC<SlotsPopoverProps> = ({
           />
         ))
       ) : (
-        <p>{t('Calendar.slots.notAvailable')}</p>
+        <p>This Availability is already used fully!!!</p>
       )}
     </div>
   );

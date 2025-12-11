@@ -22,7 +22,6 @@ import {
 } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import CustomEvent from './Components/CustomEvent';
-import { CustomToolbar } from './Components/CustomToolbar';
 import { EditDaySlots } from './Components/EditDaySlots';
 import './styles/index.css';
 import {
@@ -64,12 +63,12 @@ const TeacherCalendar = ({
 
   const parentRef = useRef<HTMLDivElement>(null);
 
-  const customToolbarCallback = useCallback(
-    (props: ToolbarProps<EventProps, object>) => {
-      return <CustomToolbar {...(props as CustomToolbarProps)} />;
-    },
-    [currentTab]
-  );
+  // const customToolbarCallback = useCallback(
+  //   (props: ToolbarProps<EventProps, object>) => {
+  //     return <CustomToolbar {...(props as CustomToolbarProps)} />;
+  //   },
+  //   [currentTab]
+  // );
 
   const getSlotListing = async (date: string) => {
     const responseData = await getApi(`/teacher-availabilities/${date}`, {
@@ -195,9 +194,9 @@ const TeacherCalendar = ({
       <Calendar
         localizer={localizer}
         events={events}
-        components={{
-          toolbar: customToolbarCallback,
-        }}
+        // components={{
+        //   toolbar: customToolbarCallback,
+        // }}
         onView={(e) => {
           setSelectedDate(undefined);
           setDaySlots([]);

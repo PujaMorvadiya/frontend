@@ -9,7 +9,7 @@
   @apply block mb-2;
 }
 .rbc-calendar {
-  @apply bg-LightGray/50 p-4 rounded-10px;
+  @apply bg-LightGray/50 p-4 rounded-[10px];
 }
 .rbc-month-header {
   @apply !gap-1;
@@ -21,16 +21,16 @@
   @apply !shadow-none !bg-PrimaryWood !text-white;
 }
 .rbc-month-row {
-  @apply !basis-unset;
+  @apply !basis-auto;
 }
 .rbc-date-cell {
   @apply aspect-square lg:aspect-auto lg:h-[100px];
 }
 .rbc-toolbar {
-  @apply flex flex-wrap justify-center text-base items-center !mb-18px;
+  @apply flex flex-wrap justify-center text-base items-center !mb-[18px];
 }
 .rbc-toolbar .rbc-toolbar-label {
-  @apply text-base text-black leading-12 font-medium !flex-grow-0 !w-[150px] !text-center;
+  @apply text-base text-black leading-[3rem] font-medium !grow-0 !w-[150px] !text-center;
 }
 .rbc-month-row + .rbc-month-row,
 .rbc-day-bg + .rbc-day-bg,
@@ -39,7 +39,7 @@
   @apply border-none !border-0;
 }
 .rbc-header {
-  @apply bg-LightWood !py-2.5 rounded !font-normal font-matter;
+  @apply bg-LightWood !py-2.5 rounded !font-normal;
 }
 .rbc-off-range-bg {
   @apply !bg-transparent;
@@ -64,7 +64,7 @@
   @apply mr-auto;
 }
 .rbc-btn-group .rbc-btn {
-  @apply first:!rounded-s-3xl last:!rounded-e-3xl;
+  @apply first:!rounded-l-full last:!rounded-r-full;
 }
 .rbc-row-bg {
   @apply gap-1;
@@ -102,11 +102,11 @@
   @apply pointer-events-none;
 }
 .rbc-row:has(.rbc-row-segment) {
-  @apply absolute w-full z-1 top-0  gap-0;
+  @apply absolute w-full z-[1] top-0 gap-0;
   /* grid grid-cols-7 */
 }
 .rbc-row:has(.rbc-row-segment) .rbc-row-segment {
-  @apply p-0 relative text-xs bg-transparent !max-w-unset;
+  @apply p-0 relative text-xs bg-transparent !max-w-none;
 }
 .rbc-row-bg .event-day {
   @apply relative;
@@ -157,10 +157,10 @@
   @apply flex gap-4 items-center;
 }
 .react-datepicker__input-container .inputField {
-  @apply rounded-10px;
+  @apply rounded-[10px];
 }
 .data-picker-wrap {
-  @apply border border-solid pe-3 border-LightGray bg-white rounded-5px flex items-center [&:has(.inputField:focus)]:ring-2 [&:has(.inputField:focus)]:ring-primary/20 [&:has(.inputField:focus)]:ring-offset-2 transition-all duration-300;
+  @apply border border-solid pe-3 border-LightGray bg-white rounded-[5px] flex items-center [&:has(.inputField:focus)]:ring-2 [&:has(.inputField:focus)]:ring-blue-500/20 [&:has(.inputField:focus)]:ring-offset-2 transition-all duration-300;
 }
 
 .react-datepicker__time-container
@@ -184,7 +184,7 @@
   .react-datepicker__time-box
   ul.react-datepicker__time-list
   li.react-datepicker__time-list-item {
-  @apply !py-2 font-matter font-normal text-black/70;
+  @apply !py-2 font-normal text-black/70;
 }
 .react-datepicker__time-container
   .react-datepicker__time
@@ -197,7 +197,7 @@
   @apply !bg-white !border-LightGray;
 }
 .react-datepicker {
-  @apply !border-0 shadow-searchBoxFilter;
+  @apply !border-0 shadow-lg;
 }
 .react-datepicker-popper[data-placement^='top'] .react-datepicker__triangle,
 .react-datepicker-popper[data-placement^='bottom'] .react-datepicker__triangle {

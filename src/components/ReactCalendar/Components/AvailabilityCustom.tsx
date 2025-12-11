@@ -2,12 +2,10 @@ import Button from 'components/Button/Button';
 import Image from 'components/Image';
 import { ConfirmationPopup } from 'components/Modal/ConfirmationPopup';
 import StatusLabel, { statusVariants } from 'components/StatusLabel';
-import { AvailabilitiesTypeEnum } from 'constants/common.constant';
 import { format, parseISO } from 'date-fns';
 import { useAxiosPut } from 'hooks/useAxios';
 import { useModal } from 'hooks/useModal';
 import _ from 'lodash';
-import { useTranslation } from 'react-i18next';
 import { Event, TimeSlotsProps } from '../types';
 
 const TeacherAvailabilityCustom = ({
@@ -19,7 +17,6 @@ const TeacherAvailabilityCustom = ({
   timeSlot?: TimeSlotsProps;
   onRefreshCalendar?: () => void;
 }) => {
-  const { t } = useTranslation();
   const [updateAvailability, { isLoading: updateLoading }] = useAxiosPut();
 
   const isExpired =
@@ -93,7 +90,7 @@ const TeacherAvailabilityCustom = ({
             onClickHandler={() => {
               confirmationModal.openModal();
             }}
-            tooltipText={t('Tooltip.Delete')}
+            tooltipText='Delete'
             tooltipPosition="left"
           >
             <Image iconName="trashIcon" />
@@ -105,19 +102,18 @@ const TeacherAvailabilityCustom = ({
         modal={confirmationModal}
         deleteTitle={
           timeSlot?.conflict
-            ? t('Teacher.Bypass.Title')
-            : t('teacherAvailability.form.timeSlots.proceed')
+            ? 'Time Conflict Detected'
+            : 'Want to proceed?'
         }
         bodyText={
           timeSlot?.conflict
-            ? t('teacherAvailability.form.timeSlots.Conflict')
-            : t('teacherAvailability.form.timeSlots.proceedText')
+            ? 'Your chosen availability overlaps with an existing course/assessment time.It is not recommended to override this conflict.'
+            : "Are you sure you want to proceed with this time slot?"
         }
-        cancelButtonText={`${t('Settings.cancel')}`}
-        confirmButtonText={t('Button.Ok')}
+        cancelButtonText='Cancel'
+        confirmButtonText='Ok'
         confirmButtonFunction={deleteAvailability}
         popUpType="warning"
-        // isSlotReoccurring={!isUpdate}
         confirmCheckbox={!!timeSlot?.conflict}
         isLoading={updateLoading}
         isDisabled={updateLoading}

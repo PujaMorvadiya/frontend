@@ -1,8 +1,7 @@
 import React from 'react';
 import { CustomEventProps, TabValueProps } from '../types';
-import CourseCustomEvent from './CourseCustomEvent';
 import LiveAssessmentCustomEvent from './LiveAssessmentCustomEvent';
-import ManageTeacherComponent from './ManageTeacherComponent';
+import ManageTeacherComponent from './ManageComponent';
 
 export const CustomEvent: React.FC<CustomEventProps> = ({
   event,
@@ -24,11 +23,7 @@ export const CustomEvent: React.FC<CustomEventProps> = ({
           onRefreshCalendar={onRefreshCalendar}
         />
       ) : (
-        <CourseCustomEvent
-          event={event}
-          currentView={currentView}
-          onRefreshCalendar={onRefreshCalendar}
-        />
+        null
       )}
     </>
   );

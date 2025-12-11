@@ -201,7 +201,8 @@ export type IconTypes =
   | 'communityDataNotFound'
   | 'bookDataNotFound'
   | 'receiptDataNotFound'
-  | 'clockDataNotFound';
+  | 'clockDataNotFound'
+  | 'zoomButtonIcon';
 
 export type DynamicIconProps = {
   className?: string;

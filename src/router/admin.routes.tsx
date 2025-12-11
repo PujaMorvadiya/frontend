@@ -5,6 +5,7 @@ import { AdminNavigation, PRIVATE_NAVIGATION } from 'constant/navigation.constan
 // Lazy imports (replace with your actual pages)
 const AdminDashboard = React.lazy(() => import("../modules/Dashboard/Home"));
 const Calendar = React.lazy(() => import("../modules/Calendar"));
+const TeacherAvailability = React.lazy(() => import("../modules/TeacherAvailability"));
 const UserProfile = React.lazy(() => import("../modules/UserProfiles"));
 const FormElements = React.lazy(() => import("../modules/Forms/FormElements"));
 const BasicTables = React.lazy(() => import("../modules/Tables/BasicTables"));
@@ -34,7 +35,11 @@ const AdminRoutes: RouteObjType[] = [
   },
   {
     ...AdminNavigation.manageAvailability.view,
-    element: <Calendar />,
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <TeacherAvailability />
+      </Suspense>
+    ),
   },
   {
     ...PRIVATE_NAVIGATION.profile.view,

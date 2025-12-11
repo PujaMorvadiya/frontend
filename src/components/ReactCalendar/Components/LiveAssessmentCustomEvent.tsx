@@ -3,15 +3,12 @@ import Image from 'components/Image';
 import StatusLabel, { statusVariants } from 'components/StatusLabel';
 import UserProfile from 'components/UserProfile';
 import { VITE_DATE_FORMAT } from 'config';
-import { Roles } from 'constants/common.constant';
 import { format, parseISO } from 'date-fns';
 import { useModal } from 'hooks/useModal';
-import ChangeTeacher from 'modules/Course/common/components/ChangeTeacher';
-import { AssessmentData } from 'modules/ManageUsers/types';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { CustomEventProps } from '../types';
+import { AssessmentData, CustomEventProps } from '../types';
+import { Roles } from 'constant/common.constant';
 
 const LiveAssessmentCustomEvent = ({
   event,
@@ -20,7 +17,6 @@ const LiveAssessmentCustomEvent = ({
   eventClass,
   isTeacherSide,
 }: CustomEventProps) => {
-  const { t } = useTranslation();
   const [selectedAssessment, setSelectedAssessment] =
     useState<AssessmentData | null>(null);
 
@@ -46,7 +42,6 @@ const LiveAssessmentCustomEvent = ({
                   isFromDataBase={!!event.teacher?.profile_image}
                   serverPath={!!event.teacher?.profile_image}
                   firstName={event.teacher?.full_name}
-                  iconLabel={event.teacher?.full_name}
                 />
               )}
               {event.student && (
@@ -57,7 +52,6 @@ const LiveAssessmentCustomEvent = ({
                   isFromDataBase={!!event.student?.profile_image}
                   serverPath={!!event.student?.profile_image}
                   firstName={event.student?.full_name}
-                  iconLabel={event.student?.full_name}
                 />
               )}
             </div>
@@ -89,7 +83,6 @@ const LiveAssessmentCustomEvent = ({
                 <Image
                   iconName="zoomButtonIcon"
                   iconClassName="!w-4 !h-4 !text-PrimaryBlue group-hover/btn:!text-white"
-                  iconLabel={t('Calendar.startMeeting.title')}
                 />
               </Link>
             )}
@@ -123,7 +116,7 @@ const LiveAssessmentCustomEvent = ({
               />
               <div className="flex gap-0 items-center">
                 <Button
-                  tooltipText={t('LiveAssessment.Tooltip.Edit.Teacher')}
+                  tooltipText="Edit Teacher"
                   tooltipPosition="left"
                   className="p-3"
                   onClickHandler={() => {
@@ -134,11 +127,10 @@ const LiveAssessmentCustomEvent = ({
                   <Image
                     iconName="editpen2"
                     iconClassName="size-4 !fill-white z-10 opacity-70 hover:opacity-100"
-                    iconLabel={t('Icon.Edit')}
                   />
                 </Button>
                 <StatusLabel
-                  text={Roles.Teacher}
+                  text={Roles.User}
                   variants={statusVariants.LightWood}
                   className="rounded-full h-fit"
                 />
@@ -159,14 +151,14 @@ const LiveAssessmentCustomEvent = ({
               isTeacherSide={isTeacherSide}
             />
             <StatusLabel
-              text={Roles.Student}
+              text={Roles.User}
               variants={statusVariants.LightWood}
               className="rounded-full"
             />
           </div>
         </div>
       )}
-      {(selectedAssessment as any)?.student_id && (
+      {/* {(selectedAssessment as any)?.student_id && (
         <ChangeTeacher
           modal={changeTeacher}
           reloadAssessment={async () => {
@@ -177,7 +169,7 @@ const LiveAssessmentCustomEvent = ({
           selectedAssessment={selectedAssessment as unknown as AssessmentData}
           selectedStudentId={(selectedAssessment as any)?.student_id ?? ''}
         />
-      )}
+      )} */}
     </>
   );
 };

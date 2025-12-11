@@ -1,8 +1,12 @@
-import { CalendarFilterType } from 'modules/Calendar';
+import { ModalProps } from 'modules/TeacherAvailability/types';
 import { Dispatch, SetStateAction } from 'react';
 import { View } from 'react-big-calendar';
 
-import { ModalProps } from 'types/comman';
+
+export interface CalendarFilterType {
+  start_date?: string | Date;
+  end_date?: string | Date;
+}
 
 export interface EventProps {
   id: number;
@@ -242,4 +246,13 @@ export interface SlotsPopoverProps {
   timeSlots?: TimeSlotsProps[];
   isLoading?: boolean;
   onRefreshCalendar?: () => void;
+}
+
+export interface AssessmentData {
+  id: string;
+  date: Date;
+  start_time: Date;
+  end_time: Date;
+  teacher: { id: string };
+  student: object;
 }

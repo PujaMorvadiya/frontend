@@ -1,6 +1,5 @@
 import React from 'react';
 import { CalendarEvent, TabValueProps } from '../types';
-import CourseCustomEvent from './CourseCustomEvent';
 import LiveAssessmentCustomEvent from './LiveAssessmentCustomEvent';
 
 interface CoursePopoverProps {
@@ -62,11 +61,7 @@ const CoursesPopover: React.FC<CoursePopoverProps> = ({
       onRefreshCalendar={onRefreshCalendar}
     />
   ) : (
-    <CourseCustomEvent
-      event={event}
-      currentView="day"
-      onRefreshCalendar={onRefreshCalendar}
-    />
+    null
   );
 };
 

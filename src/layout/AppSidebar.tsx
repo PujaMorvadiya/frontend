@@ -76,7 +76,7 @@ const getRoleBasedMenu = (activeLayout: string): NavItem[] => {
       {
         name: "Manage Availability",
         icon: <CalenderIcon />,
-        path: AdminNavigation.calendar.view.path,
+        path: AdminNavigation.manageAvailability.view.path,
       },
       {
         name: "Settings",
