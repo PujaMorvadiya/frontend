@@ -31,7 +31,11 @@ const AdminRoutes: RouteObjType[] = [
   },
   {
     ...AdminNavigation.calendar.view,
-    element: <Calendar />,
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <Calendar />
+      </Suspense>
+    ),
   },
   {
     ...AdminNavigation.manageAvailability.view,

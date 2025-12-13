@@ -1,4 +1,3 @@
-import CourseCustomEvent from 'components/ReactCalendar/Components/CourseCustomEvent';
 import LiveAssessmentCustomEvent from 'components/ReactCalendar/Components/LiveAssessmentCustomEvent';
 import { CalendarEvent } from 'components/ReactCalendar/types';
 import { View } from 'react-big-calendar';
@@ -88,22 +87,12 @@ const CustomEvent: React.FC<CoursePopoverProps> = ({
     <>
       <div className="grid grid-cols-2 gap-4 mt-4">
         {events?.map((event, index) =>
-          isLiveAssessment ? (
-            <LiveAssessmentCustomEvent
-              key={index}
-              event={event}
-              currentView="day"
-              isTeacherSide
-            />
-          ) : (
-            <CourseCustomEvent
-              eventClass="min-w-full"
-              key={index}
-              event={event}
-              currentView="day"
-              isTeacherSide
-            />
-          )
+          <LiveAssessmentCustomEvent
+            key={index}
+            event={event}
+            currentView="day"
+            isTeacherSide
+          />
         )}
       </div>
     </>

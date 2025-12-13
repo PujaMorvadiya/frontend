@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // ** Components **
 
 // ** type **
-import NameBadge from '../Badge/NameBadge';
-import Icon from '../Icon';
-import Loaders from '../Loaders';
+import NameBadge from 'components/Badge/NameBadge';
+import Icon from 'components/Icon';
+import { VITE_BACKEND_URL } from 'config';
 import { IImageProps } from './interface';
 
 const Image = (props: IImageProps) => {
@@ -14,24 +14,31 @@ const Image = (props: IImageProps) => {
     alt,
     imgClassName = '',
     NameBadgeParentClass,
-    serverPath = false,
+    serverPath = true,
     firstName,
     lastName,
     disableLoader = false,
     iconClassName,
     iconName = 'noImgStrokeSD',
-    loaderType = '',
+    // loaderType = '',
     height,
     width,
     loaderClassName,
-    showImageLoader = false,
+    showImageLoader = true,
+    isFromDataBase = true,
+    fetchPriority = 'auto',
+    isShowFixedSkeleton = false,
+    isRounded = false,
+    iconLabel,
   } = props;
+
   // ** States **
   const [fetchError, setFetchError] = useState(false);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   const [isMounted, setIsMounted] = useState(false);
   const [imageURL, setImageURL] = useState<string | File>('');
+
   useEffect(() => {
     if (!isMounted) {
       setIsMounted(true);
@@ -41,14 +48,16 @@ const Image = (props: IImageProps) => {
   useEffect(() => {
     setImageURL(src ?? '');
   }, [src, height, width, serverPath]);
+
   const imgComponent = () => {
     if (imageURL) {
       if (fetchError) {
         return (
           <img
+            // loading="lazy"
             className={`block ${imgClassName}`}
             src="/images/no-image.png"
-            alt={`${alt ?? src}`}
+            alt={`${alt ?? ''}`}
           />
         );
       }
@@ -56,36 +65,59 @@ const Image = (props: IImageProps) => {
       return (
         <img
           className={`${!isImageLoaded ? 'hidden' : 'block'} ${imgClassName}`}
-          src={`${src}`}
-          alt={`${alt || src}`}
-          onLoad={() => setIsImageLoaded(true)}
+          src={
+            isFromDataBase
+              ? imageURL.toString().includes('https://')
+                ? (imageURL as string)
+                : `${(VITE_BACKEND_URL as string) + imageURL}`
+              : (imageURL as string)
+          }
+          alt={`${alt || ''}`}
+          onLoad={() => {
+            setIsImageLoaded(true);
+          }}
           onError={() => {
             setFetchError(true);
             setIsImageLoaded(true);
           }}
           height={height}
           width={width}
+          referrerPolicy="no-referrer"
+          loading="eager"
+          fetchPriority={fetchPriority || 'auto'}
         />
       );
     }
-    return <Icon className={iconClassName} name={iconName} />;
+    return <Icon className={iconClassName} name={iconName} ariaLabel={iconLabel} />;
   };
 
   return (
     <>
-      {!disableLoader && loaderType && (
-        <Loaders className={loaderClassName} type={loaderType || 'Spin'} />
-      )}
-      {(firstName || lastName) && (
+      {/* {(firstName || lastName) && ( */}
+      {(!imageURL || fetchError) && (firstName || lastName) && (
         <NameBadge
+          imgClassName={imgClassName}
           parentClass={NameBadgeParentClass}
           FirstName={firstName ?? ''}
           LastName={lastName ?? ''}
         />
       )}
-      {!disableLoader && !isImageLoaded && imageURL && showImageLoader && (
-        <Loaders className={loaderClassName} type={loaderType || 'Spin'} />
-      )}
+      {!disableLoader &&
+        !isImageLoaded &&
+        imageURL &&
+        showImageLoader && (
+          // <Loaders className={loaderClassName} type={loaderType || 'Spin'} />
+          // height={height} width={width}
+          <>
+            {isShowFixedSkeleton ? (
+              <div className={`lazy !w-[80%] h-[500px] ${loaderClassName}`} />
+            ) : (
+              <div
+                className={`lazy imgClassName ${height || 'h-full'} ${width || 'w-full'} ${isRounded ? 'before:!rounded-full' : ''} ${loaderClassName}`}
+              />
+            )}
+          </>
+        )}
       {imgComponent()}
     </>
   );

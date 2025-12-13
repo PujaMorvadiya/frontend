@@ -7,7 +7,6 @@ import _ from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
 import { usePopper } from 'react-popper';
 import { CalendarEvent, TabValueProps } from '../types';
-import CourseCustomEvent from './CourseCustomEvent';
 import LiveAssessmentCustomEvent from './LiveAssessmentCustomEvent';
 
 interface ShowMorePopoverProps {
@@ -125,18 +124,6 @@ const ShowMorePopover: React.FC<ShowMorePopoverProps> = ({
                 )}
               </div>
             ))}
-          {currentTab === TabValueProps.Courses &&
-            daySlots?.map((data) => {
-              return (
-                <div className="mt-2">
-                  <CourseCustomEvent
-                    event={data}
-                    currentView="day"
-                    onRefreshCalendar={onRefreshCalendar}
-                  />
-                </div>
-              );
-            })}
           {currentTab === TabValueProps.Live_Assessments &&
             daySlots?.map((data) => {
               return (

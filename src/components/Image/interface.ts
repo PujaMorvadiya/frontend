@@ -20,4 +20,5 @@ export type IImageProps = {
   fetchPriority?: 'auto' | 'high' | 'low';
   isShowFixedSkeleton?: boolean;
   isRounded?: boolean;
+  iconLabel?: string;
 };

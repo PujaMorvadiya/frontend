@@ -1,11 +1,15 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin');
+
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   darkMode: "class",
   theme: {
     fontFamily: {
       outfit: ["Outfit", "sans-serif"],
+      matter: ["Matter", "sans-serif"],
+      sans: ["Inter", "sans-serif"],
     },
     screens: {
       "2xsm": "375px",
@@ -13,7 +17,30 @@ export default {
       "3xl": "2000px",
       ...defaultTheme.screens,
     },
+    container: {
+      center: true,
+      padding: '16px',
+      screens: {
+        sm: '600px',
+        md: '740px',
+        lg: '992px',
+        xl: '1142px',
+        '2xl': '1142px',
+      },
+    },
     extend: {
+      containers: {
+        480: '480px',
+        600: '600px',
+        870: '870px',
+        1024: '1024px',
+        1280: '1280px',
+        1366: '1366px',
+        1440: '1440px',
+        1548: '1548px',
+        1600: '1600px',
+        1920: '1920px',
+      },
       fontSize: {
         "title-2xl": ["72px", "90px"],
         "title-xl": ["60px", "72px"],
@@ -23,8 +50,36 @@ export default {
         "theme-xl": ["20px", "30px"],
         "theme-sm": ["14px", "20px"],
         "theme-xs": ["12px", "18px"],
+        '36px': '36px',
+      },
+      lineHeight: {
+        12: '1.2',
       },
       colors: {
+        LightWood: '#E0D9D3',
+        LightGray: '#F2F2F2',
+        OffWhite: '#F7F8FA',
+        PrimaryWood: '#5D5851',
+        PrimaryGreen: '#07641B',
+        PrimaryRed: '#AC1B1B',
+        PrimaryBlue: '#08599B',
+        PrimaryYellow: '#E1B147',
+        PrimaryYellowLight: '#EBC65B',
+        PrimaryYellowDark: '#e39d02',
+        PrimaryOrange: '#FFA500',
+        primary: 'black',
+        offWhite3: '#fff2f2',
+        DarkGray: '#4D4D4D',
+        eventBlueTint: '#e7ecf1',
+        eventBlue: '#133D74',
+        eventOrange: '#BD6A10',
+        eventOrangeTint: '#f8f0e7',
+        eventLightGreen: '#8BB27A',
+        eventLightGreenTint: '#f3f7f2',
+        eventDarkGreen: '#286246',
+        eventDarkGreenTint: '#eaefed',
+        eventPurple: '#9952e0',
+        eventPurpleTint: '#f2e9fb',
         LightWood: "#E0D9D3",
         LightGray: "#F2F2F2",
         OffWhite: "#F7F8FA",
@@ -151,6 +206,8 @@ export default {
         },
       },
       boxShadow: {
+        PrimaryRing: '0 0 0 2px rgb(255 255 255 ), 0 0 0 3px rgb(144 136 128 )',
+        searchBoxFilter: ' 0px 4px 84px 0px #00000029',
         "theme-md":
           "0px 4px 8px -2px rgba(16, 24, 40, 0.10), 0px 2px 4px -2px rgba(16, 24, 40, 0.06)",
         "theme-lg":
@@ -182,6 +239,11 @@ export default {
         99: "99",
         9: "9",
         1: "1",
+        1: "9",
+        2: "99",
+        3: "999",
+        4: "9999",
+        5: "99999",
       },
       spacing: {
         4.5: "1.125rem",
@@ -197,12 +259,75 @@ export default {
         13.5: "3.375rem",
         14.5: "3.625rem",
         15: "3.75rem",
+        unset: 'unset',
+        '100dvh': '100dvh',
+        '18px': '18px',
+        '27px': '27px',
+        '30px': '30px',
+        '34px': '34px',
+        '42px': '42px',
+        '70px': '70px',
+        13: '52px',
+        55: '55.2px',
+      },
+      backgroundImage: {
+        checkmark: 'url(assets/checkmark.svg)',
+        indeterminate: 'url(assets/minusIcon.svg)',
+        rightArrow: 'url(assets/breadcrumbArrow.svg)',
+        lazyGradient:
+          'linear-gradient(103deg, #ececec 8%, #f5f5f5 18%, #ececec 33%)',
+        lazyGradient2:
+          'linear-gradient(103deg, #ffffff 8%, #f5f5f5 18%, #ffffff 33%)',
+        dashboardWave:
+          "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTcwIiBoZWlnaHQ9IjE0OSIgdmlld0JveD0iMCAwIDE3MCAxNDkiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIG9wYWNpdHk9IjAuMyIgZD0iTTI0OC45MzggMTE3LjE0M0MyNDMuNTEgMTcxLjMyMSAxNDAuNzM4IDI1Ni41NjQgODYuNTYwOSAyNTEuMTM1QzMyLjM4MzUgMjQ1LjcwNyAtNTcuODk4OCAxMjcuNzM2IDUyLjc0NDggOTcuNDgzOEMxNjMuMzg4IDY3LjIzMiAxNDEuNDQ3IC00LjUyMDY2IDE5NS42MjUgMC45MDgxNjZDMjQ5LjgwMiA2LjMzNjk5IDI1NC4zNjcgNjIuOTY1OSAyNDguOTM4IDExNy4xNDNaIiBmaWxsPSIjRTBEOUQzIi8+Cjwvc3ZnPgo=')",
       },
       borderRadius: {
         "5px": "5px",
         "10px": "10px",
       },
+      keyframes: {
+        lazy: {
+          '0%': { backgroundPosition: '0' },
+          '100%': { backgroundPosition: '-200%' },
+        },
+        ripple: {
+          '0%': { opacity: '0.50' },
+          '100%': { opacity: '0', transform: 'scale(3)' },
+        },
+      },
+      animation: {
+        lazy: 'lazy 1.7s linear infinite',
+        ripple: 'ripple 2s ease-out infinite',
+      },
+      backgroundSize: {
+        200: '200%',
+      },
     },
   },
-  plugins: [require("@tailwindcss/forms"), require("autoprefixer")],
+  plugins: [
+    // eslint-disable-next-line global-require
+    require('@tailwindcss/container-queries'),
+    plugin(({ addUtilities }) => {
+      addUtilities({
+        '.overflow-unset': {
+          overflow: ' unset',
+        },
+        '.word-break': {
+          wordWrap: ' break-word',
+        },
+        '.wordBreak': {
+          wordBreak: 'break-all',
+        },
+        '.wordBreak-word': {
+          wordBreak: 'break-word',
+        },
+        '.all-unset': {
+          all: 'unset',
+        },
+        '.all-revert': {
+          all: 'revert',
+        },
+      });
+    }),
+  ],
 };

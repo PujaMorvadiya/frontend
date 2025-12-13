@@ -4,6 +4,7 @@ export type IconProps = {
   name: IconTypes;
   iconType?: 'default' | 'custom';
   className?: string;
+  ariaLabel?: string;
 } & SVGAttributes<SVGElement>;
 
 export type IconTypes =
