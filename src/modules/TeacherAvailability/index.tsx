@@ -42,8 +42,8 @@ const TeacherAvailability = () => {
 
   useEffect(() => {
     if (isFirstRender.current) {
-      isFirstRender.current = false; // Set to false after the first render
-      return; // Skip the first render
+      isFirstRender.current = false;
+      return;
     }
 
     setCalendarView('month');
@@ -103,35 +103,33 @@ const TeacherAvailability = () => {
     }
   };
 
-  useEffect(() => {
-    setEvents([]);
-    if (filterRange.start_date && filterRange.end_date) {
-      if (activeTab === CalendarTabValueProps.Live_Assessments) {
-        fetchAssessmentEvents();
-      } else {
-        fetchEvents();
-      }
-    }
-    if (params) {
-      modal.openModal();
-    }
-  }, [filterRange, params]);
+  // useEffect(() => {
+  //   setEvents([]);
+  //   if (filterRange.start_date && filterRange.end_date) {
+  //     if (activeTab === CalendarTabValueProps.Live_Assessments) {
+  //       fetchAssessmentEvents();
+  //     } else {
+  //       fetchEvents();
+  //     }
+  //   }
+  //   if (params) {
+  //     modal.openModal();
+  //   }
+  // }, [filterRange, params]);
 
   return (
     <>
       <div className="teacher-availability w-full pl-5">
-        <div className="teacher-availability-btn-card min-h-[150px] w-full bg-LightGray flex justify-center flex-col items-center">
+        <div className="teacher-availability-btn-card min-h-[50px] w-full bg-LightGray flex justify-center flex-col items-center">
           <Button
             className="bg-PrimaryWood text-white p-3"
             onClickHandler={() => modal.openModal()}
           >
             Add Availability
           </Button>
-          <span className="text-PrimaryWood text-sm mt-3">
-            Manage Availability
-          </span>
+
         </div>
-        <div className="calendar-main-wrap mt-3 [&_.rbc-time-content]:h-[500px] [&_.rbc-time-content]:overflow-y-auto [&_.rbc-time-content]:flex-none">
+        <div className="calendar-main-wrap mt-3 [&_.rbc-time-content]:h-[550px] [&_.rbc-time-content]:overflow-y-auto [&_.rbc-time-content]:flex-none">
           <TabComponent
             className="calendar-tab-wrap"
             current={activeTab}

@@ -127,16 +127,16 @@ export const EditDaySlots = ({
     setInitialValues(daySlotsDetails);
   }, [daySlots, selectedDate]);
 
-  useEffect(() => {
-    const fetchTimezones = async () => {
-      const { data, error } = await getRequest('/users/timezone');
-      if (!error && data) {
-        setTimezoneOptions(data);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchTimezones = async () => {
+  //     const { data, error } = await getRequest('/users/timezone');
+  //     if (!error && data) {
+  //       setTimezoneOptions(data);
+  //     }
+  //   };
 
-    fetchTimezones();
-  }, []);
+  //   fetchTimezones();
+  // }, []);
   const isExpired =
     selectedDate &&
     new Date().setHours(0, 0, 0, 0) > new Date(selectedDate).setHours(0, 0, 0, 0);

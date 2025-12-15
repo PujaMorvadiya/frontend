@@ -218,14 +218,14 @@ const Calendar = ({
 
       const eventPositions = events
         ? Array.from(events).map((event) => {
-            const rect = (event as HTMLElement).getBoundingClientRect();
-            return {
-              top: rect.top ?? 0,
-              left: rect.left ?? 0,
-              width: rect.width ?? 0,
-              height: rect.height ?? 0,
-            };
-          })
+          const rect = (event as HTMLElement).getBoundingClientRect();
+          return {
+            top: rect.top ?? 0,
+            left: rect.left ?? 0,
+            width: rect.width ?? 0,
+            height: rect.height ?? 0,
+          };
+        })
         : [];
 
       for (let i = 0; i < events.length; i++) {
@@ -339,14 +339,13 @@ const Calendar = ({
         onNavigate={handleNavigate}
         className={`
       ${currentTab === 'Courses' || currentTab === TabValueProps.Live_Assessments ? 'calendar-course-view' : ''}
-          ${
-            currentView === 'month'
-              ? 'admin-month-view'
-              : currentView === 'week'
-                ? 'admin-week-view'
-                : currentView === 'day'
-                  ? 'admin-day-view'
-                  : ''
+          ${currentView === 'month'
+            ? 'admin-month-view'
+            : currentView === 'week'
+              ? 'admin-week-view'
+              : currentView === 'day'
+                ? 'admin-day-view'
+                : ''
           } ${currentTab?.replaceAll(' ', '-').toLowerCase()}-calendar-view`}
         defaultView={currentView as View}
         localizer={localizer}
@@ -452,17 +451,17 @@ const Calendar = ({
         (currentTab === 'Live Assessments' &&
           (currentView === 'day' || currentView === 'week'))
       ) && (
-        <EventPopover
-          event={selectedEvent}
-          referenceElement={eventElement}
-          isOpen={!!selectedEvent}
-          timeSlots={timeSlots}
-          currentTab={currentTab}
-          onClose={handleClosePopover}
-          isLoading={isLoading || isLoadingLiveAssessment}
-          onRefreshCalendar={onRefreshCalendar}
-        />
-      )}
+          <EventPopover
+            event={selectedEvent}
+            referenceElement={eventElement}
+            isOpen={!!selectedEvent}
+            timeSlots={timeSlots}
+            currentTab={currentTab}
+            onClose={handleClosePopover}
+            isLoading={isLoading || isLoadingLiveAssessment}
+            onRefreshCalendar={onRefreshCalendar}
+          />
+        )}
 
       {showMorePosition && (
         <ShowMorePopover

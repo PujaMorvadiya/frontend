@@ -49,9 +49,9 @@ const TabComponent: React.FC<TabComponentProps> & { Tab: React.FC<TabProps> } = 
           {Children.map(children, (child) =>
             React.isValidElement<TabProps>(child)
               ? cloneElement(child, {
-                  isActive: child.props.uniqueKey === currentTabKey,
-                  onClick: () => handleTabClick(child.props.uniqueKey),
-                })
+                isActive: child.props.uniqueKey === currentTabKey,
+                onClick: () => handleTabClick(child.props.uniqueKey),
+              })
               : null
           )}
         </div>
@@ -68,7 +68,7 @@ const TabComponent: React.FC<TabComponentProps> & { Tab: React.FC<TabProps> } = 
         <div className="tab-content  mt-4">
           {Children.map(children, (child) =>
             React.isValidElement<TabProps>(child) &&
-            child.props.uniqueKey === currentTabKey
+              child.props.uniqueKey === currentTabKey
               ? child.props.children
               : null
           )}
@@ -94,8 +94,8 @@ const Tab: React.FC<TabProps> = ({
         ${isActive && variant === 'fill' ? ' !bg-black text-white border-black' : ''}
       `}
       onClick={onClick}
-      // TODO: add logic to do conditional blurring for paid variations in dictionary
-      // style={{ filter: 'blur(3px)' }}
+    // TODO: add logic to do conditional blurring for paid variations in dictionary
+    // style={{ filter: 'blur(3px)' }}
     >
       {icon && (
         <span className="inline-block w-4 h-4 me-1">

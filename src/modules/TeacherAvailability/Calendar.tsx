@@ -30,6 +30,7 @@ import {
   TeacherCalendarProps,
   CalendarTabValueProps,
 } from './types';
+import { CustomToolbar } from './Components/CustomToolbar';
 
 const locales = {
   'en-US': enUS,
@@ -63,12 +64,12 @@ const TeacherCalendar = ({
 
   const parentRef = useRef<HTMLDivElement>(null);
 
-  // const customToolbarCallback = useCallback(
-  //   (props: ToolbarProps<EventProps, object>) => {
-  //     return <CustomToolbar {...(props as CustomToolbarProps)} />;
-  //   },
-  //   [currentTab]
-  // );
+  const customToolbarCallback = useCallback(
+    (props: ToolbarProps<EventProps, object>) => {
+      return <CustomToolbar {...(props as CustomToolbarProps)} />;
+    },
+    [currentTab]
+  );
 
   const getSlotListing = async (date: string) => {
     const responseData = await getApi(`/teacher-availabilities/${date}`, {
@@ -194,9 +195,9 @@ const TeacherCalendar = ({
       <Calendar
         localizer={localizer}
         events={events}
-        // components={{
-        //   toolbar: customToolbarCallback,
-        // }}
+        components={{
+          toolbar: customToolbarCallback,
+        }}
         onView={(e) => {
           setSelectedDate(undefined);
           setDaySlots([]);

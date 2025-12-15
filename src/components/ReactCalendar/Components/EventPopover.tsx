@@ -29,9 +29,9 @@ export const EventPopover: React.FC<EventPopoverProps> = ({
   const [popperElement, setPopperElement] = React.useState<HTMLDivElement | null>(
     null
   );
-  const popperRef = useRef<HTMLDivElement | null>(null);
+  const popperRef: any = useRef<HTMLDivElement | null>(null);
 
-  useClickOutside(popperRef, onClose, { current: referenceElement });
+  useClickOutside(popperRef, onClose, { current: referenceElement as any });
 
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
     placement: 'auto',
