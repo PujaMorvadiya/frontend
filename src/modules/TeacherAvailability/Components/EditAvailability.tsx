@@ -62,16 +62,16 @@ export const EditAvailability = ({ modal, fetchEvents }: ModalData) => {
     }
   };
 
-  // useEffect(() => {
-  //   const fetchTimezones = async () => {
-  //     const { data, error } = await getRequest('/users/timezone');
-  //     if (!error && data) {
-  //       setTimezoneOptions(data);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchTimezones = async () => {
+      const { data, error } = await getRequest('/users/timezone');
+      if (!error && data) {
+        setTimezoneOptions(data);
+      }
+    };
 
-  //   fetchTimezones();
-  // }, []);
+    fetchTimezones();
+  }, []);
 
   const weekDays = [
     { label: 'Monday', value: 1 },

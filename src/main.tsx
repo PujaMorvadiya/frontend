@@ -4,6 +4,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 import { AppWrapper } from "./components/common/PageMeta";
 import App from "./App";
 import "./index.css";
+import "./style.css";
 import "swiper/swiper-bundle.css";
 import "simplebar-react/dist/simplebar.min.css";
 import store from "./reduxStore/store";
