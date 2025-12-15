@@ -5,6 +5,7 @@ export interface IButtonProps {
   type?: 'button' | 'submit' | 'reset';
   value?: string;
   className?: string;
+  spanClass?: string;
   small?: boolean;
   disabled?: boolean;
   children?: React.ReactNode;
@@ -28,8 +29,8 @@ export interface IButtonProps {
   | 'Blue'
   | 'White'
   | 'Yellow'
-  | 'RedOpacity'
-  | 'PrimaryBlue';
+  | 'RedOpacity';
   tooltipText?: string;
   tooltipPosition?: 'top' | 'bottom' | 'left' | 'right';
+  ariaLabel?: string;
 }
