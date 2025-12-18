@@ -22,7 +22,7 @@ import _ from 'lodash';
 import { useEffect, useState } from 'react';
 import { generateDaySlots, generateTimeSlots } from '../constants';
 import { AllSlotsProps, ErrorType } from '../types';
-import { TeacherAvailabilityUpdateValidationSchema } from '../validation';
+import { AvailabilityUpdateValidationSchema } from '../validation';
 import { roundToNearest15 } from 'utils/date';
 
 interface ModalData {
@@ -127,16 +127,16 @@ export const EditDaySlots = ({
     setInitialValues(daySlotsDetails);
   }, [daySlots, selectedDate]);
 
-  // useEffect(() => {
-  //   const fetchTimezones = async () => {
-  //     const { data, error } = await getRequest('/users/timezone');
-  //     if (!error && data) {
-  //       setTimezoneOptions(data);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchTimezones = async () => {
+      const { data, error } = await getRequest('/users/timezone');
+      if (!error && data) {
+        setTimezoneOptions(data);
+      }
+    };
 
-  //   fetchTimezones();
-  // }, []);
+    fetchTimezones();
+  }, []);
   const isExpired =
     selectedDate &&
     new Date().setHours(0, 0, 0, 0) > new Date(selectedDate).setHours(0, 0, 0, 0);
@@ -197,7 +197,7 @@ export const EditDaySlots = ({
     const cleanedTimeRanges = initialValues.time_ranges.map(
       ({ conflict: _conflict, ...rest }) => rest
     );
-    const { error } = await updateAvailability('/teacher-availabilities', {
+    const { error } = await updateAvailability('/availabilities', {
       availabilities: cleanedTimeRanges,
       deletedIds: initialValues.deleted_ids,
       deleteAllSlot,
@@ -218,7 +218,7 @@ export const EditDaySlots = ({
         initialValues={initialValues}
         enableReinitialize
         onSubmit={handleSubmit}
-        validationSchema={TeacherAvailabilityUpdateValidationSchema()}
+        validationSchema={AvailabilityUpdateValidationSchema()}
       >
         {({ values, setFieldValue, errors }) => {
           return (

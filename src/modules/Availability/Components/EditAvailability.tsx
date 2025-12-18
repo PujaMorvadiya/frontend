@@ -25,7 +25,7 @@ import { getCurrentUser } from 'reduxStore/slices/authSlice';
 import { roundToNearest15 } from 'utils/date';
 import { generateTimeSlots } from '../constants';
 import { EditAvailabilityProps, ModalProps } from '../types';
-import { TeacherAvailabilityValidationSchema } from '../validation';
+import { AvailabilityValidationSchema } from '../validation';
 import { convertToLocalTime, getLocalDateOnly, TIMEZONE } from 'utils';
 
 interface ModalData {
@@ -97,7 +97,7 @@ export const EditAvailability = ({ modal, fetchEvents }: ModalData) => {
     };
 
     const { error } = await createAvailability(
-      '/teacher-availabilities/bulkInsert',
+      '/availabilities/bulkInsert',
       payload
     );
 
@@ -121,7 +121,7 @@ export const EditAvailability = ({ modal, fetchEvents }: ModalData) => {
           initialValues={initialValues}
           onSubmit={handleSubmit}
           enableReinitialize={false}
-          validationSchema={TeacherAvailabilityValidationSchema()}
+          validationSchema={AvailabilityValidationSchema()}
         >
           {({ values, setFieldValue, errors }) => {
             const parsedStartDate = values.startDate

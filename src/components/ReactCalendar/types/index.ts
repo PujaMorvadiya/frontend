@@ -1,4 +1,4 @@
-import { ModalProps } from 'modules/TeacherAvailability/types';
+import { ModalProps } from 'modules/Availability/types';
 import { Dispatch, SetStateAction } from 'react';
 import { View } from 'react-big-calendar';
 

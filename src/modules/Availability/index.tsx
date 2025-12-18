@@ -11,14 +11,14 @@ import {
 } from 'date-fns';
 import { useAxiosGet } from 'hooks/useAxios';
 import { useModal } from 'hooks/useModal';
-import 'modules/TeacherAvailability/styles/index.css';
+import 'modules/Availability/styles/index.css';
 import { useEffect, useRef, useState } from 'react';
 import Calendar from './Calendar';
 import { EditAvailability } from './Components/EditAvailability';
 import { formatDate } from 'utils';
 import { CalendarTabValueProps, LiveAssessment } from './types';
 
-const TeacherAvailability = () => {
+const Availability = () => {
   const modal = useModal();
   const currentTab = 'Manage Availability';
   const [activeTab, setActiveTab] = useState(currentTab ?? 'Manage Availability');
@@ -54,7 +54,7 @@ const TeacherAvailability = () => {
   }, [activeTab]);
   const [calendarView, setCalendarView] = useState('month');
   const fetchEvents = async () => {
-    const AllEvents = await getEvents(`/teacher-availabilities`, {
+    const AllEvents = await getEvents(`/availabilities`, {
       params: {
         startDate: filterRange.start_date,
         endDate: filterRange.end_date,
@@ -103,19 +103,19 @@ const TeacherAvailability = () => {
     }
   };
 
-  // useEffect(() => {
-  //   setEvents([]);
-  //   if (filterRange.start_date && filterRange.end_date) {
-  //     if (activeTab === CalendarTabValueProps.Live_Assessments) {
-  //       fetchAssessmentEvents();
-  //     } else {
-  //       fetchEvents();
-  //     }
-  //   }
-  //   if (params) {
-  //     modal.openModal();
-  //   }
-  // }, [filterRange, params]);
+  useEffect(() => {
+    setEvents([]);
+    if (filterRange.start_date && filterRange.end_date) {
+      if (activeTab === CalendarTabValueProps.Live_Assessments) {
+        fetchAssessmentEvents();
+      } else {
+        fetchEvents();
+      }
+    }
+    if (params) {
+      modal.openModal();
+    }
+  }, [filterRange, params]);
 
   return (
     <>
@@ -238,4 +238,4 @@ const TeacherAvailability = () => {
   );
 };
 
-export default TeacherAvailability;
+export default Availability;

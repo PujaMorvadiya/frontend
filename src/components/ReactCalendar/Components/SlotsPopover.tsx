@@ -2,7 +2,7 @@ import 'components/ReactCalendar/style/index.css';
 import { format } from 'date-fns';
 import React from 'react';
 import { SlotsPopoverProps } from '../types';
-import TeacherAvailabilityCustom from './AvailabilityCustom';
+import AvailabilityCustom from './AvailabilityCustom';
 
 const SlotsPopover: React.FC<SlotsPopoverProps> = ({
   event,
@@ -26,7 +26,7 @@ const SlotsPopover: React.FC<SlotsPopoverProps> = ({
 
       {timeSlots && timeSlots?.length > 0 ? (
         timeSlots?.map((timeSlot) => (
-          <TeacherAvailabilityCustom
+          <AvailabilityCustom
             timeSlot={timeSlot}
             event={event}
             onRefreshCalendar={onRefreshCalendar}

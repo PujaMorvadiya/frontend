@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import { currentPageCount } from 'reduxStore/slices/paginationSlice';
 import { parseISO } from 'date-fns';
 import { format, utcToZonedTime } from 'date-fns-tz';
-import { TimeRange } from 'modules/TeacherAvailability/types';
+import { TimeRange } from 'modules/Availability/types';
 
 export const useRolePermission = (featureName: string, permissionName: string) => {
   const RolePermissions = useSelector(getRolesPermission);

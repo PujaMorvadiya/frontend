@@ -72,7 +72,7 @@ const TeacherCalendar = ({
   );
 
   const getSlotListing = async (date: string) => {
-    const responseData = await getApi(`/teacher-availabilities/${date}`, {
+    const responseData = await getApi(`/availabilities/${date}`, {
       params: {
         timezone: timeZone,
       },

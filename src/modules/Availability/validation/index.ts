@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 import { checkTimeOverlap } from '../constants';
 import { validationProps } from '../types';
 
-export const TeacherAvailabilityValidationSchema = () => {
+export const AvailabilityValidationSchema = () => {
   return Yup.object().shape({
     startDate: Yup.date().required('Start Date is Required'),
     endDate: Yup.date().required("End Date is Required"),
@@ -56,7 +56,7 @@ export const TeacherAvailabilityValidationSchema = () => {
   });
 };
 
-export const TeacherAvailabilityUpdateValidationSchema = () => {
+export const AvailabilityUpdateValidationSchema = () => {
   return Yup.object().shape({
     time_ranges: Yup.array()
       .of(

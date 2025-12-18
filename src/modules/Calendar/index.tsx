@@ -20,7 +20,7 @@ import { View } from 'react-big-calendar';
 import { useSearchParams } from 'react-router-dom';
 import FilterComponent from './FilterComponent';
 import FilterForTeacher from './FilterForTeacher';
-import { LiveAssessment } from 'modules/TeacherAvailability/types';
+import { LiveAssessment } from 'modules/Availability/types';
 import { mergeDateAndTime } from 'utils/date';
 
 export interface EventProps {

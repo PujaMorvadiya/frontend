@@ -8,7 +8,7 @@ import { useModal } from 'hooks/useModal';
 import _ from 'lodash';
 import { Event, TimeSlotsProps } from '../types';
 
-const TeacherAvailabilityCustom = ({
+const AvailabilityCustom = ({
   event,
   timeSlot,
   onRefreshCalendar,
@@ -122,4 +122,4 @@ const TeacherAvailabilityCustom = ({
   );
 };
 
-export default TeacherAvailabilityCustom;
+export default AvailabilityCustom;
